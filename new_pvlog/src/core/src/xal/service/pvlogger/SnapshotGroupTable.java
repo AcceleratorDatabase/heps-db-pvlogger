@@ -21,7 +21,7 @@ import xal.tools.data.DataAdaptor;
 
 
 /** represent the snapshot group (type) database table */
-class SnapshotGroupTable {
+public class SnapshotGroupTable {
 	/** database table name */
 	protected final String TABLE_NAME;
 	

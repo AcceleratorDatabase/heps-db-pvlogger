@@ -21,6 +21,7 @@ import xal.ca.Timestamp;
  * @author  tap
  */
 public class ChannelSnapshot {
+		
 	/** minimum value of a double supported by Oracle where we assume it can at least handle a small float */
 	final static private double MIN_VALUE = (double)Float.MIN_VALUE;
 	
@@ -29,6 +30,7 @@ public class ChannelSnapshot {
 	
 	/** time stamp reported for the channel monitor event */
 	final protected Timestamp _timestamp;
+
 	
 	/** value array */
 	final protected double[] _value;
@@ -48,7 +50,7 @@ public class ChannelSnapshot {
 	 * @param severity The severity of the channel at the time of the snapshot.
 	 * @param timestamp The timestamp of the snapshot identifying when the data was acquired.
 	 */
-	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp ) {
+	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp) {
 	
 		_pv = pv;
 		_value = value;

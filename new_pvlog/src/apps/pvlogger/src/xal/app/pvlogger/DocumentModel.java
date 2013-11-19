@@ -81,7 +81,6 @@ public class DocumentModel implements LoggerSessionListener {
 	 * @param handler the selected logger handler
 	 */
 	public void setSelectedHandler( final RemoteLoggerRecord handler ) {
-		//System.out.println("44444444");
 		_selectedHandler = handler;
 		setSelectedSessionHandler( null );
 		_proxy.handlerSelected( this, handler );
@@ -101,7 +100,6 @@ public class DocumentModel implements LoggerSessionListener {
 	 * @param handler the selected session handler
 	 */
 	public void setSelectedSessionHandler( final LoggerSessionHandler handler ) {
-		System.out.println("33333333");
 		if ( _selectedSessionHandler != null )  _selectedSessionHandler.removeLoggerSessionListener( this );
 		_selectedSessionHandler = handler;
 		_proxy.sessionHandlerSelected( this, handler );
@@ -114,7 +112,6 @@ public class DocumentModel implements LoggerSessionListener {
 	 * @return the selected session handler
 	 */
 	public LoggerSessionHandler getSelectedSessionHandler() {
-		//System.out.println(new Date()+"222222222"+_selectedSessionHandler);
 		return _selectedSessionHandler;
 	}
 	

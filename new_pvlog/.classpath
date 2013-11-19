@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/apps/pvlogger/src"/>
+	<classpathentry excluding="xal/app/pvlogger/uploadPV/|xal/app/pvlogger/uploadPV/" kind="src" path="src/apps/pvlogger/src"/>
 	<classpathentry kind="src" path="src/services/pvlogger/src"/>
 	<classpathentry kind="src" path="src/core/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

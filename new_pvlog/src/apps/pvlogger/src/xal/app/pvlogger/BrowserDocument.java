@@ -25,7 +25,7 @@ import java.net.URL;
  *
  * @author  tap
  */
-class BrowserDocument extends AcceleratorDocument {
+public class BrowserDocument extends AcceleratorDocument {
 	/** main model for this document */
 	protected BrowserModel _model;
 	

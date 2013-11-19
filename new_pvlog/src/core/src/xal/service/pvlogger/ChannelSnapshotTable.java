@@ -90,11 +90,14 @@ class ChannelSnapshotTable {
 				
 					insertStatement.setLong( 1, machineSnapshotID );
 					insertStatement.setString( 2, channelSnapshot.getPV() );
-					System.out.println("timeStamp:"+timeStamp.getNanos());
-					insertStatement.setTimestamp( 3, timeStamp );
 					
+					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp()); //Ê®Ò»ÔÂ 15, 2013 18:20:04.290000000
+					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds()); //1384557604.290000000
+					System.out.println("time:"+channelSnapshot.getTimestamp().getDate()); //Fri Nov 15 18:20:04 EST 2013
+					System.out.println("timeStamp:"+timeStamp);
+					
+					insertStatement.setTimestamp( 3, timeStamp );										
 					insertStatement.setString(4, value);
-
 					//insertStatement.setArray( 4, valueArray );
 
 					insertStatement.setInt( 5, channelSnapshot.getStatus() );
@@ -128,7 +131,6 @@ class ChannelSnapshotTable {
 	 */
 	public ChannelSnapshot[] fetchChannelSnapshotsForMachineSnapshotID( final Connection connection, final long machineSnapshotID ) throws SQLException {
 		final List<ChannelSnapshot> snapshots = new ArrayList<ChannelSnapshot>();
-        System.out.println("fetchChannelSnapshotsForMachineSnapshotID");
 		final PreparedStatement snapshotQuery = getQueryByMachineSnapshotStatement( connection );
 		snapshotQuery.setLong( 1, machineSnapshotID );
 

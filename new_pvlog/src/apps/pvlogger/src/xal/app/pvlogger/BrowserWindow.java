@@ -85,7 +85,7 @@ public class BrowserWindow extends AcceleratorWindow implements SwingConstants, 
 		addWindowListener( new WindowAdapter() {
 			public void windowOpened( final WindowEvent event ) {
 				try {
-					final ConnectionDictionary dictionary = PVLogger.newBrowsingConnectionDictionary();
+					final ConnectionDictionary dictionary = PVLogger.newBrowsingConnectionDictionary();					
 					if ( dictionary != null ) {
 						BROWSER_MODEL.connect( dictionary );
 						updateGroupMenu();

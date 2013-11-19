@@ -118,7 +118,6 @@ class PVLoggerWindow extends AcceleratorWindow implements SwingConstants, Scroll
         super(aDocument);
         setSize( 900, 600 );
 		_model = aDocument.getModel();
-//		System.out.println("1111111111"+_model);
 		_mainModel = _model.getMainModel();
 		
 		SNAPSHOT_BUTTON = new JButton( "Take Snapshot" );

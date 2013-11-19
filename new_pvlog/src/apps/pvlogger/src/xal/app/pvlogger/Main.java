@@ -14,6 +14,8 @@ import xal.application.*;
 import xal.smf.application.*;
 import xal.service.pvlogger.*;
 
+import xal.app.pvlogger.upload.*;
+
 
 /**
  * Main is the ApplicationAdaptor for the history application.
@@ -67,6 +69,9 @@ public class Main extends ApplicationAdaptor {
 		}
 		else if ( type.equals( "Browsing" ) ) {
 			return new BrowserDocument();
+		}
+		else if(type.equals("Uploading")){			
+			return new UploadDocoment();
 		}
 		else {
 			return newEmptyDocument();

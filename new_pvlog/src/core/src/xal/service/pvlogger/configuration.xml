@@ -26,6 +26,7 @@
 				<column attribute="machineSnapshot" column="snapshot_id" />
 				<column attribute="pv" column="sgnl_id" />
 				<column attribute="timestamp" column="sgnl_timestp" />
+				<column attribute="nanoseconds" column="nanosecs" />
 				<column attribute="value" column="sgnl_val" />
 				<column attribute="status" column="sgnl_stat" />
 				<column attribute="severity" column="sgnl_svrty" />

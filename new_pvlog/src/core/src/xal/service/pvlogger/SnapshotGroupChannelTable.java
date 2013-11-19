@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 /** represent the snapshot group (type) - PV relationship database table */
-class SnapshotGroupChannelTable {
+public class SnapshotGroupChannelTable {
 	/** database table name */
 	protected final String TABLE_NAME;
 	

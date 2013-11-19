@@ -17,7 +17,7 @@ import xal.tools.data.DataAdaptor;
 
 
 /** database table configuration */
-class DBTableConfiguration {
+public class DBTableConfiguration {
 	/** database table name */
 	final protected String TABLE_NAME;
 	
