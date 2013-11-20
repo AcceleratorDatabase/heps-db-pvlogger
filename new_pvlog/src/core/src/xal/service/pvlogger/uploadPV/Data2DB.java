@@ -44,7 +44,7 @@ public class Data2DB {
 		return tableConfigurations;
 	}
 
-	public void insert(Connection conn, String filePath) throws SQLException {
+	public void insert(Connection conn, String filePath) throws Exception {
 		Workbook wb = ReadExl.getWorkbook(filePath);
 		ArrayList<SgnlRec> sgnlRecs = Map2Object.getSgnlRecObject(wb);
 		Map<String, DBTableConfiguration> tableConfigurations = this

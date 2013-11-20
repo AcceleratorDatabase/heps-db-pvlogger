@@ -22,32 +22,27 @@ public class SnapshotTypeTable extends SnapshotGroupTable {
 	}
 
 	protected void batchInsertBySgnlRecs(final Connection conn,
-			ArrayList<SgnlRec> sgnl_recs) {
+			ArrayList<SgnlRec> sgnl_recs) throws SQLException {
 		String group_id = sgnl_recs.get(0).getGroup_id();
 		PreparedStatement state = null;
 		boolean need_insert = false;
-		try {
-			state = this.getInsertStatement(conn);
-			state.setString(1, group_id);
-			state.setString(2, "SCORE snapshots");
-			state.setInt(3, 0);
-			state.setInt(4, 0);
-			state.setString(5, "PHYSICS");
-			state.executeUpdate();
 
-			need_insert = true;
+		state = this.getInsertStatement(conn);
+		state.setString(1, group_id);
+		state.setString(2, "SCORE snapshots");
+		state.setInt(3, 0);
+		state.setInt(4, 0);
+		state.setString(5, "PHYSICS");
+		state.executeUpdate();
 
-			if (need_insert) {
-				state.executeBatch();
-			}
+		need_insert = true;
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (need_insert) {
-				DBTools.closePreparedStatement(state);
-			}
+		if (need_insert) {
+			state.executeBatch();
+		}
 
+		if (need_insert) {
+			DBTools.closePreparedStatement(state);
 		}
 
 		ArrayList<String> channel_names = new ArrayList();

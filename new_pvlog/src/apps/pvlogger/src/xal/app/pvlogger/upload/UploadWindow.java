@@ -12,6 +12,7 @@ package xal.app.pvlogger.upload;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,10 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import xal.service.pvlogger.PVLogger;
 import xal.service.pvlogger.uploadPV.Data2DB;
@@ -47,25 +51,29 @@ public class UploadWindow extends AcceleratorWindow {
 	private File selectedFile;
 	private Connection connection;
 
-	public UploadWindow(UploadDocoment aDocument) {
+	public UploadWindow(UploadDocoment aDocument) {			
 		super(aDocument);
-
 		this.makeContent();
+		this.remove(this.getToolBar());
+		
 		handleWindowEvents();
 	}
 
 	protected void makeContent() {
-		setSize(1200, 700);		
+		setSize(600, 200);		
 		Box mainView = new Box(javax.swing.SwingConstants.VERTICAL);
-		mainView.add(this.buildUploadView());
+		mainView.add(this.buildUploadView(),BorderLayout.CENTER);
 		getContentPane().add(mainView);
 	}
 
 	protected Container buildUploadView() {
-		final Box uploadView = new Box(javax.swing.SwingConstants.HORIZONTAL);
+		final Box mainView= new Box(javax.swing.SwingConstants.VERTICAL);	 
+		
+		final Box uploadView = new Box(javax.swing.SwingConstants.HORIZONTAL);	
 		uploadView.setBorder(BorderFactory.createEtchedBorder());
-
+		
 		final JTextField textField = new JTextField();
+		textField.setMaximumSize(new Dimension(400,30));
 		final JButton chooserButton = new JButton("Choose the spreadsheet");
 		chooserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent event) {
@@ -83,7 +91,7 @@ public class UploadWindow extends AcceleratorWindow {
 			}
 		});
 
-		JButton uploadButton = new JButton("Upload");
+		JButton uploadButton = new JButton("Submit");
 		uploadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent event) {
 				try {
@@ -95,13 +103,21 @@ public class UploadWindow extends AcceleratorWindow {
 				}
 			}
 		});
-	    
 		
-		uploadView.add(chooserButton,BorderLayout.CENTER);		
-		uploadView.add(uploadButton,BorderLayout.CENTER);
+		JLabel urlLabel=new JLabel("URL:");	    
+		
+	    uploadView.add(urlLabel,BorderLayout.CENTER);
 		uploadView.add(textField,BorderLayout.CENTER);
+		uploadView.add(chooserButton,BorderLayout.CENTER);						
+		//uploadView.add(uploadButton,BorderLayout.SOUTH);
+		
+		final Box uploadButtonView = new Box(javax.swing.SwingConstants.HORIZONTAL);	
+		uploadButtonView.add(uploadButton,BorderLayout.EAST);
+		
+		mainView.add(uploadView);
+		mainView.add(uploadButtonView);
 
-		return uploadView;
+		return mainView;
 	}
 
 	/** Handle window events. When the window opens, request a connection. */
