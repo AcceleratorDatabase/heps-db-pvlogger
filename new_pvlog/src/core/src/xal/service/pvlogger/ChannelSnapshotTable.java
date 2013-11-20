@@ -93,6 +93,7 @@ class ChannelSnapshotTable {
 					
 					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp()); //Ê®Ò»ÔÂ 15, 2013 18:20:04.290000000
 					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds()); //1384557604.290000000
+					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getSeconds()); //1.384986258575E9
 					System.out.println("time:"+channelSnapshot.getTimestamp().getDate()); //Fri Nov 15 18:20:04 EST 2013
 					System.out.println("timeStamp:"+timeStamp);
 					

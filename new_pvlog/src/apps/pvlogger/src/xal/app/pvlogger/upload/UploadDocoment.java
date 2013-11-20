@@ -37,6 +37,11 @@ public class UploadDocoment extends AcceleratorDocument {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public xal.smf.Accelerator applySelectedAcceleratorWithDefaultPath( final String filePath ) {
+		return null;
+	}
+	
 
 }
 
