@@ -58,12 +58,12 @@ class MachineSnapshotTable {
 
 	/** insert the machine snapshot and update its ID upone success */
 	public void insert( final Connection connection, final DatabaseAdaptor databaseAdaptor,  final ChannelSnapshotTable channelSnapshotTable, final MachineSnapshot machineSnapshot ) throws SQLException {
-	    System.out.println("insert...........");
+	  
 		final long primaryKey = fetchNextPrimaryKey( connection );
-		System.out.println("primaryKey"+primaryKey);
+		
 		//final long primaryKey = (Long) null;
 		final String type = machineSnapshot.getType();
-		System.out.println("type"+type);
+		
 		final Timestamp timeStamp = new Timestamp( machineSnapshot.getTimestamp().getTime() );
 
 		final PreparedStatement insertStatement = getInsertStatement( connection );
@@ -72,9 +72,9 @@ class MachineSnapshotTable {
 		insertStatement.setTimestamp( 2, timeStamp );
 		insertStatement.setString( 3, type );
 		insertStatement.setString( 4, machineSnapshot.getComment() );
-		System.out.println("insertStatement");
+	
 		insertStatement.executeUpdate();
-		System.out.println("executeUpdate");
+	
 
 		
 		final ChannelSnapshot[] channelSnapshots = machineSnapshot.getChannelSnapshots();
