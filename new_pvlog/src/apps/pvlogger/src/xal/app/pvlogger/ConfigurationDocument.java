@@ -381,6 +381,7 @@ public class ConfigurationDocument extends AcceleratorDocument {
 			MODIFIED_GROUP_RECORDS.clear();
 			requestConnectionIfNeeded();
 			final List<ChannelGroup> groups = LOGGER_CONFIGURATION.fetchChannelGroups();
+			//System.out.println("fetchChannelGroups:"+ChannelGroupRecord.toRecords( groups ));
 			GROUP_TABLE_MODEL.setRecords( ChannelGroupRecord.toRecords( groups ) );
 		}
 		catch ( Exception exception ) {

@@ -31,6 +31,7 @@ public class ChannelSnapshot {
 	/** time stamp reported for the channel monitor event */
 	final protected Timestamp _timestamp;
 
+	final protected int _nanosecs;
 	
 	/** value array */
 	final protected double[] _value;
@@ -50,14 +51,14 @@ public class ChannelSnapshot {
 	 * @param severity The severity of the channel at the time of the snapshot.
 	 * @param timestamp The timestamp of the snapshot identifying when the data was acquired.
 	 */
-	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp) {
+	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp, final int nanosecs) {
 	
 		_pv = pv;
 		_value = value;
 		_status = status;
 		_severity = severity;
 		_timestamp = timestamp;
-		
+		_nanosecs=nanosecs;
 		processValue( value );
 	}
 	
@@ -69,7 +70,8 @@ public class ChannelSnapshot {
 	 */
 	public ChannelSnapshot(String pv, ChannelTimeRecord record) {
 		
-		this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp());
+	//	this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp());
+		this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp(),record.getTimestamp().getNanosecs());
 
 	}
 	
@@ -144,6 +146,9 @@ public class ChannelSnapshot {
 		return _timestamp;
 	}
 	
+	public int getNanosecs() {
+		return _nanosecs;
+	}
 	
 	/**
 	 * Override toString() to describe the snapshot in a meaningful way.

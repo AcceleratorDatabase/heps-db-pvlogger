@@ -109,7 +109,7 @@ public class MachineSnapshot {
 	 * Get the channel snapshots.
 	 * @return The array of channel snapshots.
 	 */
-	public ChannelSnapshot[] getChannelSnapshots() {
+	public ChannelSnapshot[] getChannelSnapshots() {		
 		return _channelSnapshots;
 	}
 	

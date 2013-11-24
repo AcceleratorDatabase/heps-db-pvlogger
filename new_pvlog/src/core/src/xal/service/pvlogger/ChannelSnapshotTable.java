@@ -32,6 +32,8 @@ class ChannelSnapshotTable {
 
 	/** time stamp column */
 	protected final String TIMESTAMP_COLUMN;
+	
+	protected final String NANOSECS_COLUMN;
 
 	/** machine snapshot primary key */
 	protected final String MACHINE_SNAPSHOT_COLUMN;
@@ -60,6 +62,9 @@ class ChannelSnapshotTable {
 		PV_COLUMN = configuration.getColumn( "pv" );
 
 		TIMESTAMP_COLUMN = configuration.getColumn( "timestamp" );
+		
+		NANOSECS_COLUMN=configuration.getColumn("nanoseconds");
+		
 		VALUE_COLUMN = configuration.getColumn( "value" );
 		STATUS_COLUMN = configuration.getColumn( "status" );
 		SEVERITY_COLUMN = configuration.getColumn( "severity" );
@@ -91,11 +96,12 @@ class ChannelSnapshotTable {
 					insertStatement.setLong( 1, machineSnapshotID );
 					insertStatement.setString( 2, channelSnapshot.getPV() );
 					
-					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp()); //十一月 15, 2013 18:20:04.290000000
-					System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds()); //1384557604.290000000
+					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp()); //十一月 15, 2013 18:20:04.290000000
+					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds()); //1384557604.290000000
 					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getSeconds()); //1.384986258575E9
-					System.out.println("time:"+channelSnapshot.getTimestamp().getDate()); //Fri Nov 15 18:20:04 EST 2013
-					System.out.println("timeStamp:"+timeStamp);
+					//System.out.println("time:"+channelSnapshot.getTimestamp().getDate()); //Fri Nov 15 18:20:04 EST 2013
+					//System.out.println("sqlTimestamp:"+channelSnapshot.getTimestamp().getSQLTimestamp()); 
+					//System.out.println("timeStamp:"+channelSnapshot.getTimestamp().getNanosecs());
 					
 					insertStatement.setTimestamp( 3, timeStamp );										
 					insertStatement.setString(4, value);
@@ -103,6 +109,8 @@ class ChannelSnapshotTable {
 
 					insertStatement.setInt( 5, channelSnapshot.getStatus() );
 					insertStatement.setInt( 6, channelSnapshot.getSeverity() );
+					
+					insertStatement.setInt(7, channelSnapshot.getTimestamp().getNanosecs());
 
 					insertStatement.addBatch();
 					needsInsert = true;
@@ -145,13 +153,16 @@ class ChannelSnapshotTable {
 
 			String strValue=resultSet.getString(VALUE_COLUMN);
 			System.out.println("strValue"+strValue);
-		    double douValue = Double.parseDouble(strValue);
+		    //double douValue = Double.parseDouble(strValue);
+			double douValue = Double.parseDouble("0");
 		    final double[] value={douValue};
             System.out.println("value"+value);
 			
 			final short status = resultSet.getShort( STATUS_COLUMN );
 			final short severity = resultSet.getShort( SEVERITY_COLUMN );
-			snapshots.add( new ChannelSnapshot( pv, value, status, severity, new xal.ca.Timestamp( timestamp ) ) );
+			final int nanosecs=resultSet.getInt(NANOSECS_COLUMN);
+			
+			snapshots.add( new ChannelSnapshot( pv, value, status, severity, new xal.ca.Timestamp( timestamp ),nanosecs ) );
 			
 		}
 		if( snapshotQuery != null) {
@@ -171,7 +182,7 @@ class ChannelSnapshotTable {
 	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
 	 */
 	protected PreparedStatement getInsertStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", " + TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN + ", " + SEVERITY_COLUMN + ") VALUES (?, ?, ?, ?, ?, ?)" );
+		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", " + TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN + ", " + SEVERITY_COLUMN + ", " + NANOSECS_COLUMN+ ") VALUES (?, ?, ?, ?, ?, ?, ?)" );
 	}
 
 
