@@ -413,7 +413,7 @@ public class ConfigurationDocument extends AcceleratorDocument {
 			updateAvailableSignalsIfNeeded();
 			if ( _channelSelector != null ) {
 				final List<String> channelNames = _channelSelector.showDialog();
-				System.out.println( "Channels: " + channelNames );
+				//System.out.println( "Channels: " + channelNames );
 				if ( channelNames != null ) {
 					PENDING_GROUP_SIGNALS.addAll( channelNames );
 					Collections.sort( PENDING_GROUP_SIGNALS );

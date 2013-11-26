@@ -46,6 +46,7 @@ public class ChannelWrapper {
 	 * @param pv The PV for which to create a channel.
 	 */
 	public ChannelWrapper( final String pv ) {
+
 		_channel = ChannelFactory.defaultFactory().getChannel( pv );
 		_connectionHandler = new ConnectionHandler();
 		_channel.addConnectionListener( _connectionHandler );		

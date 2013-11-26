@@ -71,8 +71,8 @@ public class ChannelSnapshot {
 	public ChannelSnapshot(String pv, ChannelTimeRecord record) {
 		
 	//	this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp());
+		
 		this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp(),record.getTimestamp().getNanosecs());
-
 	}
 	
 	

@@ -279,14 +279,18 @@ public class LoggerSession {
 	 */
 	final public MachineSnapshot takeSnapshot() {
 		final ChannelWrapper[] channelWrappers = _group.getChannelWrappers();
+
 		MachineSnapshot machineSnapshot = new MachineSnapshot( channelWrappers.length );
 		machineSnapshot.setType( _group.getLabel() );
 		for ( int index = 0 ; index < channelWrappers.length ; index++ ) {
 			ChannelWrapper channelWrapper = channelWrappers[index];
+			
 			if ( channelWrapper == null )  continue;
 			ChannelTimeRecord record = channelWrapper.getRecord();
+			//System.out.println("record:"+record);
 			if ( record == null )  continue;
 			ChannelSnapshot snapshot = new ChannelSnapshot( channelWrapper.getPV(), record );
+			//System.out.println("snapshot"+snapshot);
 			machineSnapshot.setChannelSnapshot( index, snapshot );
 		}
 		

@@ -138,7 +138,7 @@ public class SnapshotGroupTable {
 		while ( result.next() ) {
 			types.add( result.getString( PRIMARY_KEY ) );
 		}
-		System.out.println(types);
+		//System.out.println(types);
 		return types.toArray( new String[types.size()] );	
 		
 	}

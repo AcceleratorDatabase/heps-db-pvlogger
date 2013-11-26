@@ -1,4 +1,3 @@
-
 //
 //  ChannelSnapshotTable.java
 //  xal
@@ -21,9 +20,8 @@ import java.util.ArrayList;
 
 import java.math.BigDecimal;
 
+import xal.tools.ArrayTool;
 import xal.tools.database.DatabaseAdaptor;
-
-
 
 /** represent the channel snapshot database table */
 class ChannelSnapshotTable {
@@ -32,7 +30,7 @@ class ChannelSnapshotTable {
 
 	/** time stamp column */
 	protected final String TIMESTAMP_COLUMN;
-	
+
 	protected final String NANOSECS_COLUMN;
 
 	/** machine snapshot primary key */
@@ -53,158 +51,193 @@ class ChannelSnapshotTable {
 	/** value array type (value holds an array of doubles) */
 	protected final String VALUE_ARRAY_TYPE;
 
-
 	/** Constructor */
-	public ChannelSnapshotTable( final DBTableConfiguration configuration ) {
+	public ChannelSnapshotTable(final DBTableConfiguration configuration) {
 		TABLE_NAME = configuration.getTableName();
 
-		MACHINE_SNAPSHOT_COLUMN = configuration.getColumn( "machineSnapshot" );
-		PV_COLUMN = configuration.getColumn( "pv" );
+		MACHINE_SNAPSHOT_COLUMN = configuration.getColumn("machineSnapshot");
+		PV_COLUMN = configuration.getColumn("pv");
 
-		TIMESTAMP_COLUMN = configuration.getColumn( "timestamp" );
-		
-		NANOSECS_COLUMN=configuration.getColumn("nanoseconds");
-		
-		VALUE_COLUMN = configuration.getColumn( "value" );
-		STATUS_COLUMN = configuration.getColumn( "status" );
-		SEVERITY_COLUMN = configuration.getColumn( "severity" );
+		TIMESTAMP_COLUMN = configuration.getColumn("timestamp");
 
-		VALUE_ARRAY_TYPE = configuration.getDataType( "valueArray" );
+		NANOSECS_COLUMN = configuration.getColumn("nanoseconds");
+
+		VALUE_COLUMN = configuration.getColumn("value");
+		STATUS_COLUMN = configuration.getColumn("status");
+		SEVERITY_COLUMN = configuration.getColumn("severity");
+
+		VALUE_ARRAY_TYPE = configuration.getDataType("valueArray");
 	}
-
 
 	/**
 	 * Insert the channel snapshots.
-	 * @param connection database connection
-	 * @param channelSnapshots channel snapshots to insert
-	 * @param machineSnapshotID machine snapshot ID
+	 * 
+	 * @param connection
+	 *            database connection
+	 * @param channelSnapshots
+	 *            channel snapshots to insert
+	 * @param machineSnapshotID
+	 *            machine snapshot ID
 	 */
-	public void insert( final Connection connection, final DatabaseAdaptor databaseAdaptor, final ChannelSnapshot[] channelSnapshots, final long machineSnapshotID ) throws SQLException {
-		final PreparedStatement insertStatement = getInsertStatement( connection );
+	public void insert(final Connection connection,
+			final DatabaseAdaptor databaseAdaptor,
+			final ChannelSnapshot[] channelSnapshots,
+			final long machineSnapshotID) throws SQLException {
+		final PreparedStatement insertStatement = getInsertStatement(connection);
 		boolean needsInsert = false;
 
-		for ( final ChannelSnapshot channelSnapshot : channelSnapshots ) {
-			if ( channelSnapshot != null ) {
-				final Timestamp timeStamp = channelSnapshot.getTimestamp().getSQLTimestamp();
-
+		for (final ChannelSnapshot channelSnapshot : channelSnapshots) {
+			if (channelSnapshot != null) {
+			
+				final Timestamp timeStamp = channelSnapshot.getTimestamp()
+						.getSQLTimestamp();
 				try {
-					//final Array valueArray = databaseAdaptor.getArray( VALUE_ARRAY_TYPE, connection, channelSnapshot.getValue() );
-					final double[] douValue=channelSnapshot.getValue();
-					
-					String value=douValue.toString();
-				
-					insertStatement.setLong( 1, machineSnapshotID );
-					insertStatement.setString( 2, channelSnapshot.getPV() );
-					
-					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp()); //十一月 15, 2013 18:20:04.290000000
-					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds()); //1384557604.290000000
-					//System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getSeconds()); //1.384986258575E9
-					//System.out.println("time:"+channelSnapshot.getTimestamp().getDate()); //Fri Nov 15 18:20:04 EST 2013
-					//System.out.println("sqlTimestamp:"+channelSnapshot.getTimestamp().getSQLTimestamp()); 
-					//System.out.println("timeStamp:"+channelSnapshot.getTimestamp().getNanosecs());
-					
-					insertStatement.setTimestamp( 3, timeStamp );										
-					insertStatement.setString(4, value);
-					//insertStatement.setArray( 4, valueArray );
+					 //final Array valueArray = databaseAdaptor.getArray(
+					// VALUE_ARRAY_TYPE, connection,
+					 //channelSnapshot.getValue());	
+					//double[] doubleValue=channelSnapshot.getValue();
+                   // System.out.println(channelSnapshot.getValue()[0]);
+					String value = ArrayTool.asString(channelSnapshot.getValue());
 
-					insertStatement.setInt( 5, channelSnapshot.getStatus() );
-					insertStatement.setInt( 6, channelSnapshot.getSeverity() );
-					
-					insertStatement.setInt(7, channelSnapshot.getTimestamp().getNanosecs());
+					insertStatement.setLong(1, machineSnapshotID);
+					insertStatement.setString(2, channelSnapshot.getPV());
+
+					// System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp());
+					// //十一月 15, 2013 18:20:04.290000000
+					// System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getFullSeconds());
+					// //1384557604.290000000
+					// System.out.println("channelSnapshot.getTimestamp():"+channelSnapshot.getTimestamp().getSeconds());
+					// //1.384986258575E9
+					// System.out.println("time:"+channelSnapshot.getTimestamp().getDate());
+					// //Fri Nov 15 18:20:04 EST 2013
+					// System.out.println("sqlTimestamp:"+channelSnapshot.getTimestamp().getSQLTimestamp());
+					// System.out.println("timeStamp:"+channelSnapshot.getTimestamp().getNanosecs());
+
+					insertStatement.setTimestamp(3, timeStamp);
+					insertStatement.setString(4, value);
+					// insertStatement.setArray( 4, valueArray );
+
+					insertStatement.setInt(5, channelSnapshot.getStatus());
+					insertStatement.setInt(6, channelSnapshot.getSeverity());
+
+					insertStatement.setInt(7, channelSnapshot.getTimestamp()
+							.getNanosecs());
 
 					insertStatement.addBatch();
 					needsInsert = true;
-				}
-				catch( Exception exception ) {
-					System.err.println( "Exception publishing channel snapshot:  " + channelSnapshot );
-					System.err.println( exception );
+				} catch (Exception exception) {
+					System.err
+							.println("Exception publishing channel snapshot:  "
+									+ channelSnapshot);
+					System.err.println(exception);
 				}
 
 			}
 		}
 
-		if ( needsInsert ) {
+		if (needsInsert) {
 			insertStatement.executeBatch();
 		}
-		if(insertStatement != null) {
+		if (insertStatement != null) {
 			insertStatement.close();
 		}
 	}
 
-
 	/**
-	 * Fetch the channel snapshots associated with a machine snapshot given by the machine snapshot's unique identifier.
-	 * @param connection database connection
-	 * @param machineSnapshotID machine snapshot primary key
+	 * Fetch the channel snapshots associated with a machine snapshot given by
+	 * the machine snapshot's unique identifier.
+	 * 
+	 * @param connection
+	 *            database connection
+	 * @param machineSnapshotID
+	 *            machine snapshot primary key
 	 * @return The channel snapshots associated with the machine snapshop
 	 */
-	public ChannelSnapshot[] fetchChannelSnapshotsForMachineSnapshotID( final Connection connection, final long machineSnapshotID ) throws SQLException {
+	public ChannelSnapshot[] fetchChannelSnapshotsForMachineSnapshotID(
+			final Connection connection, final long machineSnapshotID)
+			throws SQLException {
 		final List<ChannelSnapshot> snapshots = new ArrayList<ChannelSnapshot>();
-		final PreparedStatement snapshotQuery = getQueryByMachineSnapshotStatement( connection );
-		snapshotQuery.setLong( 1, machineSnapshotID );
+		final PreparedStatement snapshotQuery = getQueryByMachineSnapshotStatement(connection);
+		snapshotQuery.setLong(1, machineSnapshotID);
 
 		final ResultSet resultSet = snapshotQuery.executeQuery();
-		while ( resultSet.next() ) {
-			final String pv = resultSet.getString( PV_COLUMN );
-			final Timestamp timestamp = resultSet.getTimestamp( TIMESTAMP_COLUMN );
+		while (resultSet.next()) {
+			final String pv = resultSet.getString(PV_COLUMN);
+			final Timestamp timestamp = resultSet
+					.getTimestamp(TIMESTAMP_COLUMN);
 
-			/*final BigDecimal[] bigValue = (BigDecimal[])resultSet.getArray( VALUE_COLUMN ).getArray();			
-			final double[] value = toDoubleArray( bigValue );*/
+			/*final BigDecimal[] bigValue = (BigDecimal[]) resultSet.getArray(
+					VALUE_COLUMN).getArray();
+			System.out.println("bigValue:"+bigValue);
+			final double[] value = toDoubleArray(bigValue);*/
 
-			String strValue=resultSet.getString(VALUE_COLUMN);
-			System.out.println("strValue"+strValue);
-		    //double douValue = Double.parseDouble(strValue);
-			double douValue = Double.parseDouble("0");
-		    final double[] value={douValue};
-            System.out.println("value"+value);
-			
-			final short status = resultSet.getShort( STATUS_COLUMN );
-			final short severity = resultSet.getShort( SEVERITY_COLUMN );
-			final int nanosecs=resultSet.getInt(NANOSECS_COLUMN);
-			
-			snapshots.add( new ChannelSnapshot( pv, value, status, severity, new xal.ca.Timestamp( timestamp ),nanosecs ) );
-			
+			String strValue = resultSet.getString(VALUE_COLUMN);            			
+			final double[] value =ArrayTool.getDoubleArrayFromString(strValue);
+			//final double[] value = { douValue };
+			// System.out.println("value"+value);
+
+			final short status = resultSet.getShort(STATUS_COLUMN);
+			final short severity = resultSet.getShort(SEVERITY_COLUMN);
+			final int nanosecs = resultSet.getInt(NANOSECS_COLUMN);
+
+			snapshots.add(new ChannelSnapshot(pv, value, status, severity,
+					new xal.ca.Timestamp(timestamp), nanosecs));
+
 		}
-		if( snapshotQuery != null) {
+		if (snapshotQuery != null) {
 			snapshotQuery.close();
 		}
-		if( resultSet != null) {
+		if (resultSet != null) {
 			resultSet.close();
 		}
-		
-		return snapshots.toArray( new ChannelSnapshot[snapshots.size()] );
+
+		return snapshots.toArray(new ChannelSnapshot[snapshots.size()]);
 	}
 
-
 	/**
-	 * Create a prepared statement for inserting new records into the channel snapshot database table.
+	 * Create a prepared statement for inserting new records into the channel
+	 * snapshot database table.
+	 * 
 	 * @return the prepared statement for inserting a new channel snapshot
-	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
+	 * @throws java.sql.SQLException
+	 *             if an exception occurs during a SQL evaluation
 	 */
-	protected PreparedStatement getInsertStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", " + TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN + ", " + SEVERITY_COLUMN + ", " + NANOSECS_COLUMN+ ") VALUES (?, ?, ?, ?, ?, ?, ?)" );
+	protected PreparedStatement getInsertStatement(final Connection connection)
+			throws SQLException {
+		return connection.prepareStatement("INSERT INTO " + TABLE_NAME + "("
+				+ MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", "
+				+ TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN
+				+ ", " + SEVERITY_COLUMN + ", " + NANOSECS_COLUMN
+				+ ") VALUES (?, ?, ?, ?, ?, ?, ?)");
 	}
-
 
 	/**
-	 * Create a prepared statement to query for channel snapshot records corresponding to a machine snapshot.
-	 * @return the prepared statement to query for channel snapshots by machine snapshot
-	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
+	 * Create a prepared statement to query for channel snapshot records
+	 * corresponding to a machine snapshot.
+	 * 
+	 * @return the prepared statement to query for channel snapshots by machine
+	 *         snapshot
+	 * @throws java.sql.SQLException
+	 *             if an exception occurs during a SQL evaluation
 	 */
-	protected PreparedStatement getQueryByMachineSnapshotStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( "SELECT * FROM " + TABLE_NAME + " WHERE " + MACHINE_SNAPSHOT_COLUMN + " = ?" );
+	protected PreparedStatement getQueryByMachineSnapshotStatement(
+			final Connection connection) throws SQLException {
+		return connection.prepareStatement("SELECT * FROM " + TABLE_NAME
+				+ " WHERE " + MACHINE_SNAPSHOT_COLUMN + " = ?");
 	}
-
 
 	/**
 	 * Convert an array of numbers to an array of double values.
-	 * @param numbers array of numbers to convert
-	 * @return array of double values corresponding to the input array of numbers.
+	 * 
+	 * @param numbers
+	 *            array of numbers to convert
+	 * @return array of double values corresponding to the input array of
+	 *         numbers.
 	 */
-	static protected double[] toDoubleArray( final Number[] numbers ) {
+	static protected double[] toDoubleArray(final Number[] numbers) {
 		final double[] array = new double[numbers.length];
 
-		for ( int index = 0; index < numbers.length; index++ ) {
+		for (int index = 0; index < numbers.length; index++) {
 			array[index] = numbers[index].doubleValue();
 		}
 

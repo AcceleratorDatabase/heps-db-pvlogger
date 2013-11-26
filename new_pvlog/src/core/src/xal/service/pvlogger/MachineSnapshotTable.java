@@ -57,6 +57,13 @@ class MachineSnapshotTable {
 
 
 	/** insert the machine snapshot and update its ID upone success */
+	/**
+	 * @param connection
+	 * @param databaseAdaptor
+	 * @param channelSnapshotTable
+	 * @param machineSnapshot
+	 * @throws SQLException
+	 */
 	public void insert( final Connection connection, final DatabaseAdaptor databaseAdaptor,  final ChannelSnapshotTable channelSnapshotTable, final MachineSnapshot machineSnapshot ) throws SQLException {
 	  
 		final long primaryKey = fetchNextPrimaryKey( connection );

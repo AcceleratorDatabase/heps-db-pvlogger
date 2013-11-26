@@ -44,11 +44,8 @@ class PersistentStore {
 		final Map<String,DBTableConfiguration> tableConfigurations = loadTableConfigurations( storeAdaptor );
 		SNAPSHOT_GROUP_CHANNEL_TABLE = new SnapshotGroupChannelTable( tableConfigurations.get( "SnapshotGroupChannel" ) );
 		SNAPSHOT_GROUP_TABLE = new SnapshotGroupTable( tableConfigurations.get( "SnapshotGroup" ), SNAPSHOT_GROUP_CHANNEL_TABLE );
-		MACHINE_SNAPSHOT_TABLE = new MachineSnapshotTable( tableConfigurations.get( "MachineSnapshot" ) );
-		
-		CHANNEL_SNAPSHOT_TABLES = loadChannelSnapshotTables( storeAdaptor );
-	
-		
+		MACHINE_SNAPSHOT_TABLE = new MachineSnapshotTable( tableConfigurations.get( "MachineSnapshot" ) );		
+		CHANNEL_SNAPSHOT_TABLES = loadChannelSnapshotTables( storeAdaptor );			
 		CHANNEL_GROUPS = new HashMap<String,ChannelGroup>();
 	}
 	
@@ -241,6 +238,7 @@ class PersistentStore {
 	protected boolean publish( final Connection connection, final DatabaseAdaptor databaseAdaptor, final MachineSnapshot machineSnapshot ) {
 		try {
 			final ChannelSnapshotTable channelSnapshotTable = getChannelSnapshotTable( connection, machineSnapshot );
+			
 			MACHINE_SNAPSHOT_TABLE.insert( connection, databaseAdaptor, channelSnapshotTable, machineSnapshot );
 			
 			return true;
