@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="xal/app/pvlogger/uploadPV/|xal/app/pvlogger/uploadPV/" kind="src" path="src/apps/pvlogger/src"/>
-	<classpathentry kind="src" path="src/services/pvlogger/src"/>
+	<classpathentry kind="src" path="src/apps/score/src"/>
 	<classpathentry kind="src" path="src/core/src"/>
+	<classpathentry kind="src" path="src/services/pvlogger/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/openxal"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/poi"/>

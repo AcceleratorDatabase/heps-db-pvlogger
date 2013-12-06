@@ -101,7 +101,7 @@ public class ReadSheet {
                         if (!"".equals(cell) && cell != null) {
                             switch (cell.getCellType()) {
                                 case Cell.CELL_TYPE_STRING:
-                                    o = cell.getStringCellValue();
+                                    o = cell.getStringCellValue().trim();
                                     break;
                                 case Cell.CELL_TYPE_NUMERIC:
                                     o = cell.getNumericCellValue();
