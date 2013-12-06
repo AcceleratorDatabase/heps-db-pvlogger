@@ -61,7 +61,7 @@ public class ChannelSnapshot {
 		_nanosecs=nanosecs;
 		processValue( value );
 	}
-	
+
 	
 	/**
 	 * Constructor of a snaphsot from a channel record.

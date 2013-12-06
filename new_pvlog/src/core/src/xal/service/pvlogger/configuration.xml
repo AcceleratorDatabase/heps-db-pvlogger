@@ -8,6 +8,7 @@
 			<column attribute="period" column="snapshot_per" />
 			<column attribute="retention" column="snapshot_retent" />
 			<column attribute="service" column="svc_id" />
+			<column attribute="application" column="app_type" />
 		</dbtable>
 		<dbtable entity="SnapshotGroupChannel" name="new_pvlog.mach_snapshot_type_sgnl">
 			<column attribute="group" column="snapshot_type_nm" />
@@ -18,6 +19,7 @@
 			<column attribute="timestamp" column="snapshot_dte" />
 			<column attribute="type" column="snapshot_type_nm" />
 			<column attribute="comment" column="cmnt" />
+			<column attribute="golden" column="golden_ind" />
 			<query name="nextPrimaryKey" sql="SELECT new_pvlog.mach_snapshot_id_seq.nextval FROM dual" />
 		</dbtable>
 		
@@ -38,6 +40,7 @@
 				<column attribute="machineSnapshot" column="snapshot_id" />
 				<column attribute="pv" column="sgnl_id" />
 				<column attribute="timestamp" column="sgnl_timestp" />
+				<column attribute="nanoseconds" column="nanosecs" />
 				<column attribute="value" column="sgnl_val" />
 				<column attribute="status" column="sgnl_stat" />
 				<column attribute="severity" column="sgnl_svrty" />
@@ -45,10 +48,11 @@
 			</dbtable>
 		</service>
 		<service name="ES&amp;H">
-			<dbtable entity="ChannelSnapshot" name="new_pvlog.mach_snapshot_sgnl_perm_ret">
+			<dbtable entity="ChannelSnapshot" name="new_pvlog.mach_snapshot_sgnl">
 				<column attribute="machineSnapshot" column="snapshot_id" />
 				<column attribute="pv" column="sgnl_id" />
 				<column attribute="timestamp" column="sgnl_timestp" />
+				<column attribute="nanoseconds" column="nanosecs" />
 				<column attribute="value" column="sgnl_val" />
 				<column attribute="status" column="sgnl_stat" />
 				<column attribute="severity" column="sgnl_svrty" />

@@ -1,10 +1,15 @@
 package xal.service.pvlogger.uploadPV;
 
 
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.poi.ss.usermodel.Workbook;
+
+import xal.tools.ArrayTool;
+
+
 
 import com.mysql.jdbc.Connection;
 
@@ -12,24 +17,11 @@ public class Test {
 
 	/**
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
-		/*Workbook wb=ReadExl.getWorkbook("E:\\PV Logger\\pvloggerSample.xlsx");
-		
-        ArrayList a=ReadSheet.getDataList(wb);
-        ArrayList b=Data2Map.getMapData(a);
-        System.out.println(b);*/
-		
-		try {
-			Connection conn=DBTools.getConnection("mysql", "jdbc:mysql://localhost:3306/new_pvlog", "root", "826529");
-			String filePath="E:\\PV Logger\\pvloggerSample.xlsx";
-			new Data2DB().insert(conn, filePath);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	public static void main(String[] args) throws Exception {
+		String s="{1.0,2.0}";
+		double[] a=ArrayTool.getDoubleArrayFromString(s);
 	}
 
 }

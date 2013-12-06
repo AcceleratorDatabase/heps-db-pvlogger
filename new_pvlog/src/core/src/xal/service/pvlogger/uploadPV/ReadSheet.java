@@ -43,6 +43,13 @@ public class ReadSheet {
 		return cell.getStringCellValue();
 	}
 	
+	public static String getSecondCellCon(Workbook wb){
+		int[] row_col_num=getFirstCellNum(wb);
+		Sheet sheet=wb.getSheetAt(0);
+		Cell cell= sheet.getRow(row_col_num[0]).getCell(row_col_num[1]+1);
+		return cell.getStringCellValue();
+	}
+	
 	/*
 	 * int[0]:row number
 	 * int[1]:column number

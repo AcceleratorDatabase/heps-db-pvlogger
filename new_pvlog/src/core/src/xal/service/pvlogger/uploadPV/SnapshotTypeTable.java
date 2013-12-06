@@ -15,24 +15,30 @@ public class SnapshotTypeTable extends SnapshotGroupTable {
 
 	protected PreparedStatement getInsertStatement(final Connection connection)
 			throws SQLException {
+		
 		return connection.prepareStatement("INSERT INTO " + TABLE_NAME + "("
 				+ this.PRIMARY_KEY + ", " + this.DESCRIPTION_COLUMN + ", "
 				+ this.PERIOD_COLUMN + ", " + this.RETENTION_COLUMN + ", "
-				+ this.SERVICE_COLUMN + ") VALUES (?, ?, ?, ?, ?)");
+				+ this.SERVICE_COLUMN + ", " + this.APP_TYPE
+				+ ") VALUES (?, ?, ?, ?, ?, ?)");
 	}
 
 	protected void batchInsertBySgnlRecs(final Connection conn,
 			ArrayList<SgnlRec> sgnl_recs) throws SQLException {
 		String group_id = sgnl_recs.get(0).getGroup_id();
+		String app_type=sgnl_recs.get(0).getApp_type();
 		PreparedStatement state = null;
 		boolean need_insert = false;
 
 		state = this.getInsertStatement(conn);
 		state.setString(1, group_id);
-		state.setString(2, "SCORE snapshots");
+		state.setString(2, null);
 		state.setInt(3, 0);
 		state.setInt(4, 0);
 		state.setString(5, "PHYSICS");
+		state.setString(6,app_type);
+		
+		
 		state.executeUpdate();
 
 		need_insert = true;

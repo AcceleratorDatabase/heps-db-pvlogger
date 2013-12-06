@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import xal.tools.data.DataAdaptor;
 import xal.tools.xml.XmlDataAdaptor;
 
+import xal.service.pvlogger.ChannelSnapshotTable;
 import xal.service.pvlogger.DBTableConfiguration;
 import xal.service.pvlogger.SnapshotGroupChannelTable;
 
@@ -33,14 +34,32 @@ public class Data2DB {
 		DataAdaptor persistentStoreAdaptor = configurationAdaptor
 				.childAdaptor("persistentStore");
 		List<DataAdaptor> tableAdaptors = (List<DataAdaptor>) persistentStoreAdaptor
-				.childAdaptors("dbtable");
-
+				.childAdaptors("dbtable");		
 		for (DataAdaptor tableAdaptor : tableAdaptors) {
 			DBTableConfiguration configuration = DBTableConfiguration
 					.getInstance(tableAdaptor);
 			String entity = tableAdaptor.stringValue("entity");
 			tableConfigurations.put(entity, configuration);
 		}
+		
+		final List<DataAdaptor> serviceAdaptors = persistentStoreAdaptor.childAdaptors( "service" );
+		for ( final DataAdaptor serviceAdaptor : serviceAdaptors ) {
+			 DataAdaptor tableAdaptor = serviceAdaptor.childAdaptor( "dbtable" );
+			 DBTableConfiguration configuration = DBTableConfiguration
+						.getInstance(tableAdaptor);
+			 String entity = tableAdaptor.stringValue("entity");
+			 tableConfigurations.put(entity, configuration);
+		}
+		/*
+		 * final Map<String,ChannelSnapshotTable> channelSnapshotTables = new HashMap<String,ChannelSnapshotTable>();
+		final List<DataAdaptor> serviceAdaptors = storeAdaptor.childAdaptors( "service" );
+		for ( final DataAdaptor serviceAdaptor : serviceAdaptors ) {
+			final String serviceID = serviceAdaptor.stringValue( "name" );
+			final DataAdaptor tableAdaptor = serviceAdaptor.childAdaptor( "dbtable" );
+			final ChannelSnapshotTable channelSnapshotTable = new ChannelSnapshotTable( new DBTableConfiguration( tableAdaptor ) );
+			channelSnapshotTables.put( serviceID, channelSnapshotTable );
+		}
+		 * */
 		return tableConfigurations;
 	}
 

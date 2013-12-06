@@ -40,6 +40,8 @@ public class SnapshotGroupTable {
 	/** service ID foreign key column */
 	protected final String SERVICE_COLUMN;
 	
+	protected final String APP_TYPE;
+	
 	/** proxy to the table of channel - channel group relationships */
 	protected SnapshotGroupChannelTable SNAPSHOT_GROUP_CHANNEL_TABLE;
 	
@@ -62,6 +64,7 @@ public class SnapshotGroupTable {
 		PERIOD_COLUMN = configuration.getColumn( "period" );
 		RETENTION_COLUMN = configuration.getColumn( "retention" );
 		SERVICE_COLUMN = configuration.getColumn( "service" );
+		APP_TYPE=configuration.getColumn("application");
 	}
 	
 	
@@ -122,6 +125,16 @@ public class SnapshotGroupTable {
 		return types.toArray( new String[types.size()] );		
 	}
 	
+	public String[] fetchTypesForApp( final Connection connection ,String app_type)  throws SQLException {
+		final PreparedStatement statement = this.getGroupsQueryForAppStatement(connection);
+		statement.setString(1, app_type.toLowerCase());
+		final List<String> types = new ArrayList<String>();		
+		final ResultSet result = getGroupsQueryStatement( connection ).executeQuery();
+		while ( result.next() ) {
+			types.add( result.getString( PRIMARY_KEY ) );
+		}
+		return types.toArray( new String[types.size()] );		
+	}
 	
 	/**
 	 * Fetch the channel groups associated with the service ID as an array of types
@@ -151,6 +164,10 @@ public class SnapshotGroupTable {
 	 */
 	protected PreparedStatement getGroupsQueryStatement( final Connection connection ) throws SQLException {
 		return connection.prepareStatement( "SELECT * FROM " + TABLE_NAME );
+	}
+	
+	protected PreparedStatement getGroupsQueryForAppStatement( final Connection connection ) throws SQLException {
+		return connection.prepareStatement( "SELECT * FROM " + TABLE_NAME +"WHERE" + APP_TYPE +"=?" );
 	}
 	
 	

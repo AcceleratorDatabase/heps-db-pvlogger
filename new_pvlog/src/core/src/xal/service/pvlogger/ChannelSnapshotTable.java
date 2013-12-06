@@ -24,7 +24,7 @@ import xal.tools.ArrayTool;
 import xal.tools.database.DatabaseAdaptor;
 
 /** represent the channel snapshot database table */
-class ChannelSnapshotTable {
+public class ChannelSnapshotTable {
 	/** database table name */
 	protected final String TABLE_NAME;
 
@@ -158,8 +158,8 @@ class ChannelSnapshotTable {
 			throws SQLException {
 		final List<ChannelSnapshot> snapshots = new ArrayList<ChannelSnapshot>();
 		final PreparedStatement snapshotQuery = getQueryByMachineSnapshotStatement(connection);
-		snapshotQuery.setLong(1, machineSnapshotID);
-
+		snapshotQuery.setLong(1, machineSnapshotID); 
+		
 		final ResultSet resultSet = snapshotQuery.executeQuery();
 		while (resultSet.next()) {
 			final String pv = resultSet.getString(PV_COLUMN);

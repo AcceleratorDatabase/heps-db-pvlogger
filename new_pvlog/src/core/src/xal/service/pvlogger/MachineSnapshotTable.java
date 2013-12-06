@@ -21,7 +21,7 @@ import xal.tools.database.DatabaseAdaptor;
 
 
 /** represent the machine snapshot database table */
-class MachineSnapshotTable {
+public class MachineSnapshotTable {
 	/** database table name */
 	protected final String TABLE_NAME;
 
@@ -39,6 +39,8 @@ class MachineSnapshotTable {
 
 	/** SQL to get the next primary key */
 	protected final String NEXT_PRIMARY_KEY_SQL;
+	
+	protected final String USER;
 
 
 	/** Constructor */
@@ -53,6 +55,8 @@ class MachineSnapshotTable {
 
 		
 		NEXT_PRIMARY_KEY_SQL = configuration.getQuerySQL( "nextPrimaryKey" );
+		
+		USER="userid";
 	}
 
 
@@ -79,7 +83,7 @@ class MachineSnapshotTable {
 		insertStatement.setTimestamp( 2, timeStamp );
 		insertStatement.setString( 3, type );
 		insertStatement.setString( 4, machineSnapshot.getComment() );
-	
+		insertStatement.setString(5, machineSnapshot.get_userid());
 		insertStatement.executeUpdate();
 	
 
@@ -106,6 +110,40 @@ class MachineSnapshotTable {
 		}
 		//return l;
 		return l+1;
+	}
+
+
+	/**
+	 * Fetch a machine snaspshot with the specified primary key.
+	 * @param connection database connection
+	 * @param primaryKey The unique machine snapshot identifier
+	 * @return The machine snapshop read from the persistent store.
+	 */
+	public MachineSnapshot fetchMachineSnapshot( final Connection connection, final long primaryKey ) throws SQLException {
+		final PreparedStatement queryStatement  = getQueryByPrimaryKeyStatement( connection );
+		queryStatement.setLong( 1, primaryKey );
+		final ResultSet record = queryStatement.executeQuery();
+		if ( record.next() ) {
+			final String type = record.getString( TYPE_COLUMN );
+			final Timestamp timestamp = record.getTimestamp( TIMESTAMP_COLUMN );
+			final String comment = record.getString( COMMENT_COLUMN );
+			if(queryStatement != null) {
+				queryStatement.close();
+			}
+			if( record  != null) {
+				record .close();
+			}
+			return new MachineSnapshot( primaryKey, type, timestamp, comment, new ChannelSnapshot[0] );
+		}
+		else {
+			if(queryStatement != null) {
+				queryStatement.close();
+			}
+			if( record  != null) {
+				record .close();
+			}
+			return null;
+		}
 	}
 
 
@@ -195,6 +233,7 @@ class MachineSnapshotTable {
 		return snapshots.toArray( new MachineSnapshot[snapshots.size()] );
 	}
 
+	
 
 	/**
 	 * Fetch the machine snapshots within the specified time range. The machine snapshots do not include the channel snapshots. A complete snapshot
@@ -248,7 +287,7 @@ class MachineSnapshotTable {
 	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
 	 */
 	protected PreparedStatement getInsertStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + PRIMARY_KEY + ", " + TIMESTAMP_COLUMN + ", " + TYPE_COLUMN + ", " + COMMENT_COLUMN + ")" + " VALUES (?, ?, ?, ?)" );
+		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + PRIMARY_KEY + ", " + TIMESTAMP_COLUMN + ", " + TYPE_COLUMN + ", " + COMMENT_COLUMN + ","+USER+")" + " VALUES (?, ?, ?, ?,?)" );
 	}
 
 
@@ -290,4 +329,5 @@ class MachineSnapshotTable {
 	protected PreparedStatement getQueryByTimerangeStatement( final Connection connection ) throws SQLException {
 			return connection.prepareStatement( "SELECT * FROM " + TABLE_NAME + " WHERE " + TIMESTAMP_COLUMN + " > ? AND " + TIMESTAMP_COLUMN + " < ? order by " + TIMESTAMP_COLUMN );
 	}
+	
 }

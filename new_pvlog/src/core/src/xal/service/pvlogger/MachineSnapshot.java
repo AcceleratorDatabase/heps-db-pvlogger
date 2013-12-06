@@ -28,7 +28,20 @@ public class MachineSnapshot {
 	protected String _type;
 	protected String _comment;
 	
+	protected String _userid;
 	
+	
+	
+	public String get_userid() {
+		return _userid;
+	}
+
+
+	public void set_userid(String _userid) {
+		this._userid = _userid;
+	}
+
+
 	/**
 	 * Static initializer 
 	 */
@@ -53,6 +66,14 @@ public class MachineSnapshot {
 		_channelSnapshots = channelSnapshots;
 	}
 	
+	public MachineSnapshot(long id, String type, Date timestamp, String comment,String user, ChannelSnapshot[] channelSnapshots) {
+		_id = id;
+		_type = type;
+		_timestamp = timestamp;
+		_comment = comment;
+		_channelSnapshots = channelSnapshots;
+		_userid=user;
+	}
 	
 	/**
 	 * Primary constructor.
@@ -75,6 +96,8 @@ public class MachineSnapshot {
 	public MachineSnapshot(Date timestamp, String comment, ChannelSnapshot[] channelSnapshots) {
 		this(0, timestamp, comment, channelSnapshots);
 	}
+	
+	
 	
 	
 	/**
