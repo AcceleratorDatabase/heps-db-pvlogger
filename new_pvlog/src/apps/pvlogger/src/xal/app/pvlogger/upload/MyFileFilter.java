@@ -3,7 +3,10 @@ package xal.app.pvlogger.upload;
 import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class MyFileFilter extends FileFilter{
 
 	private String ext;

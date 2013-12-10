@@ -21,9 +21,9 @@ import java.net.URL;
 
 
 /**
- * PVLoggerDocument
  *
- * @author  tap
+ * @author  lv
+ * @author  chu
  */
 public class UploadDocoment extends AcceleratorDocument {
 

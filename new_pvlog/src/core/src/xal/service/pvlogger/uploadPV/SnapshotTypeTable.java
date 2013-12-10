@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import xal.service.pvlogger.*;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class SnapshotTypeTable extends SnapshotGroupTable {
 
 	public SnapshotTypeTable(DBTableConfiguration configuration,

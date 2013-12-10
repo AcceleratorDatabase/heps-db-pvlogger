@@ -17,7 +17,10 @@ import xal.tools.xml.XmlDataAdaptor;
 import xal.service.pvlogger.ChannelSnapshotTable;
 import xal.service.pvlogger.DBTableConfiguration;
 import xal.service.pvlogger.SnapshotGroupChannelTable;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class Data2DB {
 
 	private SgnlRecTable sgnl_rec_table;

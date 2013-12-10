@@ -1,9 +1,9 @@
 package xal.service.pvlogger.uploadPV;
 
 /**
- * @author admin
- * 
- */
+* @author  lv
+* @author  chu
+*/
 public class SgnlRec {
 
 	private String sgnl_id;

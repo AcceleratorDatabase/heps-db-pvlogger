@@ -38,10 +38,9 @@ import xal.tools.database.ConnectionDictionary;
 import xal.tools.database.DatabaseAdaptor;
 
 /**
- * BrowserWindow is the main window for browsing the snapshots.
- * 
- * @author tap
- */
+* @author  lv
+* @author  chu
+*/
 public class UploadWindow extends AcceleratorWindow {
 
 	/**

@@ -7,7 +7,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class ReadSheet {
 	
 	public static int getColNum(Workbook wb){

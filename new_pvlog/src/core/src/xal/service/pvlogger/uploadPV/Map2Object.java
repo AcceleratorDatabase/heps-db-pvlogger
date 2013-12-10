@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.poi.ss.usermodel.Workbook;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class Map2Object {
 
 	public static ArrayList<SgnlRec> getSgnlRecObject(Workbook wb) {

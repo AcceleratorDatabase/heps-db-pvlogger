@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+* @author  lv
+* @author  chu
+*/
 public class SgnlRecTable {
 
 	protected String TABLE_NAME;

@@ -20,8 +20,9 @@ public class Test {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		String s="{1.0,2.0}";
-		double[] a=ArrayTool.getDoubleArrayFromString(s);
+		String str=" see  ";
+		str=str.trim();
+		System.out.println("right:"+str+"!!");
 	}
 
 }
