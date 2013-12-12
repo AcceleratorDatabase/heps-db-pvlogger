@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="apps/score/src"/>
+	<classpathentry kind="src" path="apps/pvlogger/src"/>
+	<classpathentry kind="src" path="core/src"/>
+	<classpathentry kind="src" path="services/pvlogger/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/openxal"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
