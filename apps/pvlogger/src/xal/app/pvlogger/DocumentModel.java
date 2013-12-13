@@ -13,7 +13,6 @@ package xal.app.pvlogger;
 import xal.tools.messaging.MessageCenter;
 import xal.tools.data.GenericRecord;
 
-import java.sql.Time;
 import java.util.*;
 
 
@@ -94,6 +93,7 @@ public class DocumentModel implements LoggerSessionListener {
 	public RemoteLoggerRecord getSelectedHandler() {
 		return _selectedHandler;
 	}
+	
 	
 	/**
 	 * Set the selected session handler

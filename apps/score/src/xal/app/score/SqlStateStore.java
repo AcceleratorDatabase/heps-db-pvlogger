@@ -11,16 +11,17 @@ package xal.app.score;
 
 import xal.service.pvlogger.ChannelSnapshot;
 import xal.service.pvlogger.DBTableConfiguration;
+import xal.service.pvlogger.Data2DB;
 import xal.service.pvlogger.MachineSnapshot;
 import xal.service.pvlogger.MachineSnapshotTable;
 import xal.service.pvlogger.MachineSnapshotTableExtend;
+import xal.service.pvlogger.SgnlRec;
+import xal.service.pvlogger.SgnlRecTable;
 import xal.service.pvlogger.SnapshotGroupChannelTable;
 import xal.service.pvlogger.SnapshotGroupTable;
 import xal.service.pvlogger.ChannelSnapshotTable;
-import xal.service.pvlogger.uploadPV.Data2DB;
-import xal.service.pvlogger.uploadPV.SgnlRec;
-import xal.service.pvlogger.uploadPV.SgnlRecTable;
-import xal.service.pvlogger.uploadPV.SnapshotTypeTable;
+import xal.service.pvlogger.SnapshotTypeTable;
+
 
 import xal.tools.ArrayTool;
 import xal.tools.database.ConnectionDictionary;

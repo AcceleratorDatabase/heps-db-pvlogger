@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="services/pvlogger/extension/src"/>
+	<classpathentry kind="src" path="apps/score/resources"/>
 	<classpathentry kind="src" path="apps/score/src"/>
 	<classpathentry kind="src" path="apps/pvlogger/src"/>
-	<classpathentry kind="src" path="core/src"/>
+	<classpathentry kind="src" path="apps/pvlogger/resources"/>
 	<classpathentry kind="src" path="services/pvlogger/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-examples-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-excelant-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-ooxml-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-ooxml-schemas-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/poi-scratchpad-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="E:/NetBeansProjects/discs_model/external lib/xmlbeans-2.3.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/openxal"/>
+	<classpathentry kind="lib" path="E:/openxal/source code/mysql-connector-java-5.1.18-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

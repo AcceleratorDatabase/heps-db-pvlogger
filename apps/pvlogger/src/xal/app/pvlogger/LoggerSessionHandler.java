@@ -13,7 +13,7 @@ package xal.app.pvlogger;
 import xal.service.pvlogger.*;
 import xal.tools.data.*;
 import xal.tools.dispatch.DispatchQueue;
-import xal.tools.services.*;
+import xal.extension.service.*;
 import xal.tools.messaging.MessageCenter;
 
 import java.util.*;
@@ -120,7 +120,6 @@ public class LoggerSessionHandler {
 			public void run() {
 				try {
 					Date lastLoggerEventTime = _remoteProxy.getLastLoggerEventTime(_groupType);
-					//System.out.println("***********"+_groupType);
 					if ( !lastLoggerEventTime.equals( _lastLoggerEventTime ) ) {
 						boolean hasUpdate = false;
 

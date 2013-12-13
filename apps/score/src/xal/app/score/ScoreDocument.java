@@ -21,12 +21,12 @@ import java.text.DecimalFormat;
 import java.awt.Toolkit;
 import java.sql.Timestamp;
 
-import xal.application.*;
-import xal.tools.bricks.WindowReference;
-import xal.tools.data.*;
-import xal.tools.swing.*;
 import xal.ca.*;
-import xal.tools.logbook.ElogUtility;
+import xal.extension.application.Commander;
+import xal.extension.application.XalDocument;
+import xal.extension.widgets.swing.DoubleInputTextField;
+import xal.tools.data.GenericRecord;
+
 
 
 /**
@@ -177,7 +177,7 @@ public class ScoreDocument extends XalDocument implements HandleErrorMessage{
 	    String msg = "Score save set taken:\n" + name + "\n" + theSnapshot.getComment();
 	    if(msg.length() > 3999) msg = msg.substring(0, 4000);
 	    try {
-		    ElogUtility.defaultUtility().postEntry( Main.DEFAULT_LOGBOOK, "Score save taken", msg );
+		    //ElogUtility.defaultUtility().postEntry( Main.DEFAULT_LOGBOOK, "Score save taken", msg );
 		    System.out.println(msg);		    
 	    }
 	    catch (Exception exc) {

@@ -8,10 +8,15 @@ package xal.app.score;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
+import xal.extension.application.Application;
+import xal.extension.application.ApplicationAdaptor;
+import xal.extension.application.XalDocument;
+
 import java.awt.event.*;
 import java.net.*;
 
-import xal.application.*;
+
 
 /**
  * Main is the main program for the score app.

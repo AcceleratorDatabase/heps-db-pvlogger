@@ -17,10 +17,11 @@ import javax.swing.event.*;
 import javax.swing.table.*;
 import java.sql.Timestamp;
 
+import xal.extension.application.XalDocument;
+import xal.extension.application.XalWindow;
+import xal.extension.widgets.swing.KeyValueFilteredTableModel;
 import xal.tools.apputils.*;
-import xal.application.*;
 import xal.tools.IconLib;
-import xal.tools.swing.*;
 import xal.tools.data.DataTable;
 import xal.tools.database.*;
 

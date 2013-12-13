@@ -10,10 +10,13 @@ package xal.app.score;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
+
+import xal.extension.application.XalDocument;
+import xal.extension.bricks.WindowReference;
+
 import java.awt.event.*;
 
-import xal.application.XalDocument;
-import xal.tools.bricks.WindowReference;
+
 
 
 /** SnapshotCommitController */

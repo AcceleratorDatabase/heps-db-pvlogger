@@ -14,17 +14,17 @@ import javax.swing.event.*;
 import java.util.*;
 import java.sql.*;
 
-import xal.application.*;
-import xal.smf.application.AcceleratorDocument;
+import xal.extension.application.*;
+import xal.extension.smf.application.AcceleratorDocument;
 import xal.smf.*;
 import xal.ca.Channel;
-import xal.tools.bricks.WindowReference;
+import xal.extension.bricks.WindowReference;
 import xal.service.pvlogger.*;
 import xal.tools.data.KeyValueSorting;
 import xal.tools.data.KeyValueRecordListener;
 import xal.tools.database.*;
-import xal.tools.swing.*;
-import xal.smf.widgets.NodeChannelSelector;
+import xal.extension.widgets.swing.*;
+import xal.extension.widgets.smf.NodeChannelSelector;
 
 
 /** document for managing the PV Logger configuration */
@@ -381,7 +381,6 @@ public class ConfigurationDocument extends AcceleratorDocument {
 			MODIFIED_GROUP_RECORDS.clear();
 			requestConnectionIfNeeded();
 			final List<ChannelGroup> groups = LOGGER_CONFIGURATION.fetchChannelGroups();
-			//System.out.println("fetchChannelGroups:"+ChannelGroupRecord.toRecords( groups ));
 			GROUP_TABLE_MODEL.setRecords( ChannelGroupRecord.toRecords( groups ) );
 		}
 		catch ( Exception exception ) {
@@ -413,7 +412,7 @@ public class ConfigurationDocument extends AcceleratorDocument {
 			updateAvailableSignalsIfNeeded();
 			if ( _channelSelector != null ) {
 				final List<String> channelNames = _channelSelector.showDialog();
-				//System.out.println( "Channels: " + channelNames );
+				System.out.println( "Channels: " + channelNames );
 				if ( channelNames != null ) {
 					PENDING_GROUP_SIGNALS.addAll( channelNames );
 					Collections.sort( PENDING_GROUP_SIGNALS );

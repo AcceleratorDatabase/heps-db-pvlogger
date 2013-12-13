@@ -10,11 +10,11 @@
 
 package xal.app.pvlogger;
 
-import xal.application.*;
-import xal.smf.application.*;
+import xal.extension.application.*;
+import xal.extension.smf.application.*;
 import xal.service.pvlogger.*;
 import xal.tools.data.*;
-import xal.tools.swing.KeyValueTableModel;
+import xal.extension.widgets.swing.KeyValueTableModel;
 import xal.tools.dispatch.*;
 import xal.tools.UpdateListener;
 
@@ -312,9 +312,8 @@ class PVLoggerWindow extends AcceleratorWindow implements SwingConstants, Scroll
 	
 	/** Update information about the remote logger including logging period and logger state. */
 	protected void updateLoggerInfo() {
-	
 		LoggerSessionHandler session = _model.getSelectedSessionHandler();
-		//System.out.println(session);
+		
 		String status = (session != null) ? String.valueOf( session.isLogging() ) : "false";
 		_loggingStatusField.setText(status);
 	}
@@ -622,7 +621,6 @@ class PVLoggerWindow extends AcceleratorWindow implements SwingConstants, Scroll
 	
 	/** reload the properties and channels for the currently selected logger session */
 	public void reloadSelectedLoggerSession() {
-		
 		final LoggerSessionHandler session = _model.getSelectedSessionHandler();
 		if ( session != null ) {
 			session.reloadFromDatabase();
@@ -766,9 +764,7 @@ class PVLoggerWindow extends AcceleratorWindow implements SwingConstants, Scroll
 	
 	/** Start the selected loggers logging. */
 	public void resumeLoggingSelections() {
-		
 		final RemoteLoggerRecord record = getSelectedRemoteLoggerRecord();
-
 		if ( record != null ) {
 			record.resumeLogging();
 		}

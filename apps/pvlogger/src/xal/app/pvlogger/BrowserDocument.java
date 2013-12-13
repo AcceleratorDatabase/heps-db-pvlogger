@@ -11,11 +11,11 @@
 package xal.app.pvlogger;
 
 import xal.service.pvlogger.*;
-import xal.smf.application.*;
-import xal.application.*;
+import xal.extension.smf.application.*;
+import xal.extension.application.*;
 import xal.tools.database.*;
 import xal.tools.apputils.PathPreferenceSelector;
-import xal.tools.apputils.pvlogbrowser.*;
+import xal.service.pvlogger.apputils.browser.*;
 
 import java.net.URL;
 
@@ -25,7 +25,7 @@ import java.net.URL;
  *
  * @author  tap
  */
-public class BrowserDocument extends AcceleratorDocument {
+class BrowserDocument extends AcceleratorDocument {
 	/** main model for this document */
 	protected BrowserModel _model;
 	

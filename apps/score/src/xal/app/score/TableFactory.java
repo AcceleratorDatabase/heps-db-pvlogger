@@ -9,8 +9,9 @@
 package xal.app.score;
 
 import xal.ca.*;
+import xal.extension.widgets.swing.KeyValueFilteredTableModel;
 import xal.tools.data.*;
-import xal.tools.swing.*;
+
 import xal.tools.text.FormattedNumber;
 import xal.tools.data.GenericRecord;
 
@@ -19,7 +20,6 @@ import java.util.*;
 import java.util.List;
 import java.text.*;
 import javax.swing.*;
-import javax.swing.SwingConstants;
 import javax.swing.table.*;
 
 

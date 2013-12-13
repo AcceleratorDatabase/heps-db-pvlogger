@@ -10,7 +10,7 @@
 
 package xal.service.pvlogger;
 
-import xal.tools.services.ServiceDirectory;
+import xal.extension.service.ServiceDirectory;
 import xal.ca.Channel;
 
 import java.util.*;
@@ -24,9 +24,8 @@ import java.util.*;
  */
 public class LoggerService implements RemoteLogging {
 	// constants
-  protected final String IDENTITY = "PV Logger";
+	protected final String IDENTITY = "PV Logger";
 	
-	//protected final String IDENTITY = "PHYSICS";
 	// model
 	protected final LoggerModel _model;
 	

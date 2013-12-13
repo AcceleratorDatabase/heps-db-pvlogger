@@ -11,7 +11,7 @@
 package xal.service.pvlogger;
 
 import xal.tools.database.*;
-import xal.tools.services.ServiceDirectory;
+import xal.extension.service.ServiceDirectory;
 
 import java.util.*;
 
@@ -47,11 +47,10 @@ public class LoggerModel {
 	 */
 	public LoggerModel() {
 		SESSION_MODELS = new HashMap<String,SessionModel>();
+		SERVICE_ID = System.getProperty( "serviceID", "PHYSICS" );
 		
-		SERVICE_ID = System.getProperty( "serviceID", "PHYSICS" );	
-	
 		PV_LOGGER = new PVLogger();
-
+		
 		reloadGroups();
 	}
 	
@@ -77,10 +76,7 @@ public class LoggerModel {
 		PV_LOGGER.removeAllLoggerSessions();
 		
 		try {
-			//System.out.println(SERVICE_ID);
-			//System.out.println("loggerSessions: "+PV_LOGGER.requestEnabledLoggerSessionsForService( SERVICE_ID ));
 			final List<LoggerSession> loggerSessions = PV_LOGGER.requestEnabledLoggerSessionsForService( SERVICE_ID );
-			
 			for ( final LoggerSession session : loggerSessions ) {
 				final String groupType = session.getChannelGroup().getLabel();
 				SESSION_MODELS.put( groupType, new SessionModel( session ) );
@@ -111,7 +107,6 @@ public class LoggerModel {
 	 */
 	protected String[] fetchChannelGroupTypes() {
 		try {
-			
 			return PV_LOGGER.fetchTypes( SERVICE_ID );
 		}
 		catch( Exception exception ) {
@@ -195,6 +190,5 @@ public class LoggerModel {
 	static public Date getLaunchTime() {
 		return LAUNCH_TIME;
 	}
-
 }
 

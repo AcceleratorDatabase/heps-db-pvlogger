@@ -11,14 +11,14 @@
 package xal.app.pvlogger;
 
 import xal.service.pvlogger.*;
-import xal.application.*;
-import xal.smf.application.*;
+import xal.extension.application.*;
+import xal.extension.smf.application.*;
 import xal.tools.database.*;
 import xal.tools.apputils.files.RecentFileTracker;
-import xal.tools.apputils.pvlogbrowser.*;
-import xal.tools.plot.*;
-import xal.tools.swing.KeyValueTableModel;
-import xal.tools.swing.KeyValueFilteredTableModel;
+import xal.service.pvlogger.apputils.browser.*;
+import xal.extension.widgets.plot.*;
+import xal.extension.widgets.swing.KeyValueTableModel;
+import xal.extension.widgets.swing.KeyValueFilteredTableModel;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -66,7 +66,6 @@ public class BrowserWindow extends AcceleratorWindow implements SwingConstants, 
 	 * @param model document's model
 	 */
 	public BrowserWindow( final BrowserDocument aDocument, final BrowserModel model ) {
-		
 		super( aDocument );
 
 		BROWSER_MODEL = model;
@@ -85,7 +84,7 @@ public class BrowserWindow extends AcceleratorWindow implements SwingConstants, 
 		addWindowListener( new WindowAdapter() {
 			public void windowOpened( final WindowEvent event ) {
 				try {
-					final ConnectionDictionary dictionary = PVLogger.newBrowsingConnectionDictionary();					
+					final ConnectionDictionary dictionary = PVLogger.newBrowsingConnectionDictionary();
 					if ( dictionary != null ) {
 						BROWSER_MODEL.connect( dictionary );
 						updateGroupMenu();
@@ -143,7 +142,6 @@ public class BrowserWindow extends AcceleratorWindow implements SwingConstants, 
 		final int BUTTON_GAP = 20;
 
 		JButton connectButton = new JButton( "Connect..." );
-	
 		queryView.add( connectButton );
 		connectButton.addActionListener( new ActionListener() {
 			public void actionPerformed( final ActionEvent event ) {

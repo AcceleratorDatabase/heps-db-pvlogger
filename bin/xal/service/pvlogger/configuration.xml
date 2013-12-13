@@ -19,7 +19,6 @@
 			<column attribute="timestamp" column="snapshot_dte" />
 			<column attribute="type" column="snapshot_type_nm" />
 			<column attribute="comment" column="cmnt" />
-			<column attribute="golden" column="golden_ind" />
 			<query name="nextPrimaryKey" sql="SELECT new_pvlog.mach_snapshot_id_seq.nextval FROM dual" />
 		</dbtable>
 		

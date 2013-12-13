@@ -7,9 +7,10 @@
 package xal.app.score;
 
 import xal.ca.*;
-import xal.tools.swing.KeyValueTableModel;
+import xal.extension.widgets.swing.KeyValueTableModel;
+
 import xal.tools.data.*;
-import xal.tools.logbook.ElogUtility;
+
 
 import java.text.*;
 import java.util.*;
@@ -234,7 +235,7 @@ public class Restorer implements Runnable, PutListener {
 	    if(msg.length() > 3999) msg = msg.substring(0, 4000);	    	    
 	    
 	    try {
-		    ElogUtility.defaultUtility().postEntry( Main.DEFAULT_LOGBOOK, "Score restore done", msg );
+		   // ElogUtility.defaultUtility().postEntry( Main.DEFAULT_LOGBOOK, "Score restore done", msg );
 		    System.out.println(msg);
 	    }
 	    catch (Exception exc) {
