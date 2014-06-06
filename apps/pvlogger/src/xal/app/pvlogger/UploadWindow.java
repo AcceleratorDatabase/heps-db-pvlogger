@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import xal.extension.smf.application.AcceleratorWindow;
+import xal.extension.application.smf.AcceleratorWindow;
 import xal.service.pvlogger.Data2DB;
 import xal.service.pvlogger.PVLogger;
 import xal.tools.database.ConnectionDialog;

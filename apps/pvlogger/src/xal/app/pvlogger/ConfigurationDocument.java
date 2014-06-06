@@ -15,7 +15,7 @@ import java.util.*;
 import java.sql.*;
 
 import xal.extension.application.*;
-import xal.extension.smf.application.AcceleratorDocument;
+import xal.extension.application.smf.AcceleratorDocument;
 import xal.smf.*;
 import xal.ca.Channel;
 import xal.extension.bricks.WindowReference;
@@ -396,7 +396,7 @@ public class ConfigurationDocument extends AcceleratorDocument {
 	 * @see ApplicationAdaptor#getPathToResource
      */
     protected String getCustomMenuDefinitionPath() {
-		return Application.getAdaptor().getPathToResource( "configuration-menu" );
+		return "configuration-menu.properties";
     }
 	
 	

@@ -221,12 +221,12 @@ public class SqlStateStore implements StateStore {
 
 		if (!"".equals(sp_pv) && sp_pv != null) {
 			ChannelSnapshot channelSnapshot_sp = new ChannelSnapshot(sp_pv,
-					sp_value, -1, -1, new xal.ca.Timestamp(time), 0);
+					sp_value, -1, -1, new xal.ca.Timestamp(time));
 			channelSnapshots.add(channelSnapshot_sp);
 		}
 		if (!"".equals(rb_pv) && rb_pv != null) {
 			ChannelSnapshot channelSnapshot_rb = new ChannelSnapshot(rb_pv,
-					rb_value, -1, -1, new xal.ca.Timestamp(time), 0);
+					rb_value, -1, -1, new xal.ca.Timestamp(time));
 			channelSnapshots.add(channelSnapshot_rb);
 		}
 
@@ -289,13 +289,13 @@ public class SqlStateStore implements StateStore {
 				if (!"".equals(sp_pv) && sp_pv != null) {
 					ChannelSnapshot channelSnapshot_sp = new ChannelSnapshot(
 							sp_pv, sp_value, -1, -1,
-							new xal.ca.Timestamp(time), 0);
+							new xal.ca.Timestamp(time));
 					channelSnapshots.add(channelSnapshot_sp);
 				}
 				if (!"".equals(rb_pv) && rb_pv != null) {
 					ChannelSnapshot channelSnapshot_rb = new ChannelSnapshot(
 							rb_pv, rb_value, -1, -1,
-							new xal.ca.Timestamp(time), 0);
+							new xal.ca.Timestamp(time));
 					channelSnapshots.add(channelSnapshot_rb);
 				}
 			}

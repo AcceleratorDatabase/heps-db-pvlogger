@@ -10,7 +10,7 @@
 
 package xal.app.pvlogger;
 
-import xal.extension.smf.application.AcceleratorDocument;
+import xal.extension.application.smf.AcceleratorDocument;
 import xal.service.pvlogger.*;
 import xal.tools.database.*;
 import xal.tools.apputils.PathPreferenceSelector;

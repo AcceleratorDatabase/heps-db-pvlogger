@@ -108,7 +108,7 @@ public class SqlStateStore1 implements StateStore {
 	 * @param connection  A database connection
 	 * @param doc error message handler (which is the data document)
 	 */
-	public SqlStateStore( final ConnectionDictionary dict, final Connection connection, HandleErrorMessage doc) {
+	public SqlStateStore1( final ConnectionDictionary dict, final Connection connection, HandleErrorMessage doc) {
 		_dictionary = dict;
 		DatabaseAdaptor adaptor = _dictionary.getDatabaseAdaptor();
 		_databaseAdaptor = (adaptor != null ) ? adaptor : DatabaseAdaptor.getInstance();
@@ -126,7 +126,7 @@ public class SqlStateStore1 implements StateStore {
 	 *
 	 * @param connection  A database connection
 	 */
-	public SqlStateStore( final Connection connection ) {
+	public SqlStateStore1( final Connection connection ) {
 		this( null, connection, null);
 	}
 

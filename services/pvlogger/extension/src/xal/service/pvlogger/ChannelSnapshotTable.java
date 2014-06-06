@@ -120,8 +120,9 @@ public class ChannelSnapshotTable {
 					insertStatement.setInt(5, channelSnapshot.getStatus());
 					insertStatement.setInt(6, channelSnapshot.getSeverity());
 
-					insertStatement.setInt(7, channelSnapshot.getTimestamp()
-							.getNanosecs());
+					int nanosecs = channelSnapshot.getTimestamp().getFullSeconds().subtract( channelSnapshot.getTimestamp().getFullSeconds().setScale(0, BigDecimal.ROUND_DOWN) ).movePointRight(9).intValue();
+					
+					insertStatement.setInt(7, nanosecs);
 
 					insertStatement.addBatch();
 					needsInsert = true;
@@ -172,7 +173,8 @@ public class ChannelSnapshotTable {
 			final double[] value = toDoubleArray(bigValue);*/
 
 			String strValue = resultSet.getString(VALUE_COLUMN);            			
-			final double[] value =ArrayTool.getDoubleArrayFromString(strValue);
+//			final double[] value =ArrayTool.getDoubleArrayFromString(strValue);
+			final double[] value =getDoubleArrayFromString(strValue);
 			//final double[] value = { douValue };
 			// System.out.println("value"+value);
 
@@ -181,7 +183,7 @@ public class ChannelSnapshotTable {
 			final int nanosecs = resultSet.getInt(NANOSECS_COLUMN);
 
 			snapshots.add(new ChannelSnapshot(pv, value, status, severity,
-					new xal.ca.Timestamp(timestamp), nanosecs));
+					new xal.ca.Timestamp(timestamp)));
 
 		}
 		if (snapshotQuery != null) {
@@ -242,5 +244,20 @@ public class ChannelSnapshotTable {
 		}
 
 		return array;
+	}
+	
+	public double[] getDoubleArrayFromString(final String douString) {
+		double[] douArray=null;
+		int start = douString.indexOf("{");
+		int end = douString.indexOf("}");
+		if (start < end) {
+			String newString = douString.substring(start+1, end);
+			String[] strArray=newString.split(",");
+			douArray=new double[strArray.length];
+			for(int i=0;i<strArray.length;i++){				
+				douArray[i]=Double.valueOf(strArray[i]);				
+			}
+		}
+		return douArray;
 	}
 }

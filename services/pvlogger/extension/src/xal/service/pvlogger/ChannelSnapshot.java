@@ -10,8 +10,9 @@
 
 package xal.service.pvlogger;
 
-import xal.tools.ArrayTool;
+import java.math.BigDecimal;
 
+import xal.tools.ArrayTool;
 import xal.ca.ChannelTimeRecord;
 import xal.ca.Timestamp;
 
@@ -51,14 +52,15 @@ public class ChannelSnapshot {
 	 * @param severity The severity of the channel at the time of the snapshot.
 	 * @param timestamp The timestamp of the snapshot identifying when the data was acquired.
 	 */
-	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp, final int nanosecs) {
+	public ChannelSnapshot( final String pv, final double[] value, final int status, final int severity, final Timestamp timestamp) {
 	
 		_pv = pv;
 		_value = value;
 		_status = status;
 		_severity = severity;
 		_timestamp = timestamp;
-		_nanosecs=nanosecs;
+		// _nanosecs=nanosecs;
+		_nanosecs = timestamp.getFullSeconds().subtract( timestamp.getFullSeconds().setScale(0, BigDecimal.ROUND_DOWN) ).movePointRight(9).intValue();
 		processValue( value );
 	}
 
@@ -70,9 +72,9 @@ public class ChannelSnapshot {
 	 */
 	public ChannelSnapshot(String pv, ChannelTimeRecord record) {
 		
-	//	this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp());
+		this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp());
 		
-		this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp(),record.getTimestamp().getNanosecs());
+	//	this(pv, record.doubleArray(), record.status(), record.severity(), record.getTimestamp(),record.getTimestamp().getNanosecs());
 	}
 	
 	
