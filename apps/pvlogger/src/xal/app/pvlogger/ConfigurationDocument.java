@@ -9,8 +9,10 @@
 package xal.app.pvlogger;
 
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
+
 import java.util.*;
 import java.sql.*;
 
@@ -19,7 +21,10 @@ import xal.extension.application.smf.AcceleratorDocument;
 import xal.smf.*;
 import xal.ca.Channel;
 import xal.extension.bricks.WindowReference;
-import xal.service.pvlogger.*;
+import xal.service.pvlogger.ChannelGroup;
+import xal.service.pvlogger.ChannelGroupRecord;
+import xal.service.pvlogger.LoggerConfiguration;
+import xal.service.pvlogger2.*;
 import xal.tools.data.KeyValueSorting;
 import xal.tools.data.KeyValueRecordListener;
 import xal.tools.database.*;

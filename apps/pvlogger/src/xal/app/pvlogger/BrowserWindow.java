@@ -10,12 +10,16 @@
 
 package xal.app.pvlogger;
 
-import xal.service.pvlogger.*;
+import xal.service.pvlogger.ChannelGroup;
+import xal.service.pvlogger.ChannelSnapshot;
+import xal.service.pvlogger.MachineSnapshot;
+import xal.service.pvlogger.PVLogger;
 import xal.extension.application.*;
 import xal.extension.application.smf.*;
 import xal.tools.database.*;
 import xal.tools.apputils.files.RecentFileTracker;
 import xal.service.pvlogger.apputils.browser.*;
+import xal.service.pvlogger2.*;
 import xal.extension.widgets.plot.*;
 import xal.extension.widgets.swing.KeyValueTableModel;
 import xal.extension.widgets.swing.KeyValueFilteredTableModel;
@@ -30,12 +34,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
 import java.awt.Dimension;
 import java.awt.Container;
 import java.awt.event.*;
+
 import javax.swing.event.*;
 
 /**

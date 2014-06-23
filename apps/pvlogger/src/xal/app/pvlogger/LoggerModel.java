@@ -11,13 +11,16 @@
 package xal.app.pvlogger;
 
 import java.util.*;
+
 import javax.swing.Timer;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-import xal.service.pvlogger.*;
+import xal.service.pvlogger.RemoteLogging;
+import xal.service.pvlogger2.*;
 import xal.extension.service.*;
 import xal.tools.dispatch.DispatchQueue;
 import xal.tools.messaging.MessageCenter;

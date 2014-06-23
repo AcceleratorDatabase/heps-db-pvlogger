@@ -31,8 +31,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import xal.extension.application.smf.AcceleratorWindow;
-import xal.service.pvlogger.Data2DB;
 import xal.service.pvlogger.PVLogger;
+import xal.service.pvlogger2.Data2DB;
 import xal.tools.database.ConnectionDialog;
 import xal.tools.database.ConnectionDictionary;
 import xal.tools.database.DatabaseAdaptor;

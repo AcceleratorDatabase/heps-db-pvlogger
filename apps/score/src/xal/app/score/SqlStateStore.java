@@ -11,18 +11,16 @@ package xal.app.score;
 
 import xal.service.pvlogger.ChannelSnapshot;
 import xal.service.pvlogger.DBTableConfiguration;
-import xal.service.pvlogger.Data2DB;
 import xal.service.pvlogger.MachineSnapshot;
 import xal.service.pvlogger.MachineSnapshotTable;
-import xal.service.pvlogger.MachineSnapshotTableExtend;
-import xal.service.pvlogger.SgnlRec;
-import xal.service.pvlogger.SgnlRecTable;
 import xal.service.pvlogger.SnapshotGroupChannelTable;
-import xal.service.pvlogger.SnapshotGroupTable;
 import xal.service.pvlogger.ChannelSnapshotTable;
-import xal.service.pvlogger.SnapshotTypeTable;
-
-
+import xal.service.pvlogger2.Data2DB;
+import xal.service.pvlogger2.MachineSnapshotTableExtend;
+import xal.service.pvlogger2.SgnlRec;
+import xal.service.pvlogger2.SgnlRecTable;
+import xal.service.pvlogger2.SnapshotGroupTable;
+import xal.service.pvlogger2.SnapshotTypeTable;
 import xal.tools.ArrayTool;
 import xal.tools.database.ConnectionDictionary;
 import xal.tools.database.DatabaseAdaptor;
@@ -302,7 +300,7 @@ public class SqlStateStore implements StateStore {
 		}
 
 		MachineSnapshot machineSnapshot = new MachineSnapshot(0, type, time,
-				coment, user,
+				coment,
 				channelSnapshots.toArray(new ChannelSnapshot[channelSnapshots
 						.size()]));
 		try {
