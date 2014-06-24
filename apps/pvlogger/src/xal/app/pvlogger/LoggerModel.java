@@ -20,7 +20,6 @@ import java.util.*;
 import java.util.concurrent.Callable;
 
 import xal.service.pvlogger.RemoteLogging;
-import xal.service.pvlogger2.*;
 import xal.extension.service.*;
 import xal.tools.dispatch.DispatchQueue;
 import xal.tools.messaging.MessageCenter;

@@ -12,7 +12,6 @@ package xal.app.pvlogger;
 
 import xal.extension.application.*;
 import xal.extension.application.smf.*;
-import xal.service.pvlogger2.*;
 import xal.tools.data.*;
 import xal.extension.widgets.swing.KeyValueTableModel;
 import xal.tools.dispatch.*;

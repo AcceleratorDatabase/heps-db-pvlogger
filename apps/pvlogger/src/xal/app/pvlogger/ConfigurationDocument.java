@@ -24,7 +24,6 @@ import xal.extension.bricks.WindowReference;
 import xal.service.pvlogger.ChannelGroup;
 import xal.service.pvlogger.ChannelGroupRecord;
 import xal.service.pvlogger.LoggerConfiguration;
-import xal.service.pvlogger2.*;
 import xal.tools.data.KeyValueSorting;
 import xal.tools.data.KeyValueRecordListener;
 import xal.tools.database.*;
@@ -397,10 +396,9 @@ public class ConfigurationDocument extends AcceleratorDocument {
     
     /**
 	 * Get a custom menu definition for this document
-     * @return The menu definition properties file path in classpath notation
-	 * @see ApplicationAdaptor#getPathToResource
+     * @return The menu definition properties file
      */
-    protected String getCustomMenuDefinitionPath() {
+    protected String getCustomMenuDefinitionResource() {
 		return "configuration-menu.properties";
     }
 	

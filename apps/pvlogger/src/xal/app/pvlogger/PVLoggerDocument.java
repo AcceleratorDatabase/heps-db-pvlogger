@@ -12,7 +12,6 @@ package xal.app.pvlogger;
 
 import xal.extension.application.*;
 import xal.extension.application.smf.*;
-import xal.service.pvlogger2.*;
 import xal.tools.database.*;
 import xal.tools.apputils.PathPreferenceSelector;
 

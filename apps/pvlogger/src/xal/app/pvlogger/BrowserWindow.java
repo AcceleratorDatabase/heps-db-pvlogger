@@ -19,7 +19,6 @@ import xal.extension.application.smf.*;
 import xal.tools.database.*;
 import xal.tools.apputils.files.RecentFileTracker;
 import xal.service.pvlogger.apputils.browser.*;
-import xal.service.pvlogger2.*;
 import xal.extension.widgets.plot.*;
 import xal.extension.widgets.swing.KeyValueTableModel;
 import xal.extension.widgets.swing.KeyValueFilteredTableModel;

@@ -15,7 +15,6 @@ import xal.extension.application.*;
 import xal.tools.database.*;
 import xal.tools.apputils.PathPreferenceSelector;
 import xal.service.pvlogger.apputils.browser.*;
-import xal.service.pvlogger2.*;
 
 import java.net.URL;
 
