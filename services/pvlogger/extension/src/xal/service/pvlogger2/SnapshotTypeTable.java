@@ -5,9 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import xal.service.pvlogger.DBTableConfiguration;
-import xal.service.pvlogger.SnapshotGroupChannelTable;
-import xal.service.pvlogger.SnapshotGroupTable;
+import xal.service.pvlogger2.DBTableConfiguration;
+import xal.service.pvlogger2.SnapshotGroupChannelTable;
 
 /**
 * @author  lv

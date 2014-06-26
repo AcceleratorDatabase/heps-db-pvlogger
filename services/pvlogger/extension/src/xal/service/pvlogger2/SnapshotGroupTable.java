@@ -18,8 +18,8 @@ import java.util.Set;
 
 import xal.service.pvlogger.ChannelGroup;
 import xal.service.pvlogger.ChannelGroupRecord;
-import xal.service.pvlogger.DBTableConfiguration;
-import xal.service.pvlogger.SnapshotGroupChannelTable;
+import xal.service.pvlogger2.DBTableConfiguration;
+import xal.service.pvlogger2.SnapshotGroupChannelTable;
 import xal.tools.data.DataAdaptor;
 
 

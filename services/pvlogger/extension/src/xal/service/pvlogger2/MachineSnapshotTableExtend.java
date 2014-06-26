@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import xal.service.pvlogger.DBTableConfiguration;
-import xal.service.pvlogger.MachineSnapshotTable;
+import xal.service.pvlogger2.DBTableConfiguration;
+import xal.service.pvlogger2.MachineSnapshotTable;
 /**
 * @author  lv
 * @author  chu

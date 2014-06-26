@@ -14,9 +14,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import xal.tools.data.DataAdaptor;
 import xal.tools.xml.XmlDataAdaptor;
 
-import xal.service.pvlogger.ChannelSnapshotTable;
-import xal.service.pvlogger.DBTableConfiguration;
-import xal.service.pvlogger.SnapshotGroupChannelTable;
+import xal.service.pvlogger2.DBTableConfiguration;
+import xal.service.pvlogger2.SnapshotGroupChannelTable;
 /**
 * @author  lv
 * @author  chu

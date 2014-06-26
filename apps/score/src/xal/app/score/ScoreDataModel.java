@@ -71,7 +71,7 @@ public class ScoreDataModel {
 		_hasConnected = false;
 		_snapshots.clear();
 		_scoreTypes = null;
-		_scoreStore = new SqlStateStore(dictionary, connection, theDoc);
+		_scoreStore = new SqlStateStore1(dictionary, connection, theDoc);
 		_hasConnected = true;
 	}
     
