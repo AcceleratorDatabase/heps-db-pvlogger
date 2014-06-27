@@ -10,8 +10,6 @@
 
 package xal.service.pvlogger2;
 
-import xal.service.pvlogger.LoggerSession;
-import xal.service.pvlogger.PVLogger;
 import xal.tools.database.*;
 import xal.extension.service.ServiceDirectory;
 

@@ -11,9 +11,6 @@
 package xal.service.pvlogger2;
 
 import xal.extension.service.ServiceDirectory;
-import xal.service.pvlogger.LoggerSession;
-import xal.service.pvlogger.MachineSnapshot;
-import xal.service.pvlogger.RemoteLogging;
 import xal.ca.Channel;
 
 import java.util.*;

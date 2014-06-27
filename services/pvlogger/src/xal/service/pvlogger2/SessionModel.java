@@ -10,9 +10,6 @@
 
 package xal.service.pvlogger2;
 
-import xal.service.pvlogger.LoggerChangeAdapter;
-import xal.service.pvlogger.LoggerSession;
-import xal.service.pvlogger.MachineSnapshot;
 import xal.tools.database.*;
 import xal.extension.service.ServiceDirectory;
 
@@ -30,7 +27,7 @@ public class SessionModel {
 	final private LoggerEventHandler LOGGER_EVENT_HANDLER;
 	
 	/** Logger Session */
-	protected xal.service.pvlogger.LoggerSession _loggerSession;
+	protected LoggerSession _loggerSession;
 	
 	/** Last snapshot published */
 	protected MachineSnapshot _lastPublishedSnapshot;

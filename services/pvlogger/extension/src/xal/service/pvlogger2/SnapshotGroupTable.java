@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import xal.service.pvlogger.ChannelGroup;
-import xal.service.pvlogger.ChannelGroupRecord;
-import xal.service.pvlogger2.DBTableConfiguration;
-import xal.service.pvlogger2.SnapshotGroupChannelTable;
 import xal.tools.data.DataAdaptor;
 
 

@@ -14,7 +14,7 @@ import java.util.*;
 import xal.tools.UpdateListener;
 import xal.extension.service.*;
 import xal.tools.dispatch.DispatchQueue;
-import xal.service.pvlogger.RemoteLogging;
+import xal.service.pvlogger2.RemoteLogging;
 
 
 /** RemoteLoggerRecord */

@@ -10,7 +10,7 @@
 
 package xal.app.pvlogger;
 
-import xal.service.pvlogger.RemoteLogging;
+import xal.service.pvlogger2.RemoteLogging;
 import xal.tools.data.*;
 import xal.tools.dispatch.DispatchQueue;
 import xal.extension.service.*;

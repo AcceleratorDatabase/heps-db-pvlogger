@@ -10,15 +10,15 @@
 
 package xal.app.pvlogger;
 
-import xal.service.pvlogger.ChannelGroup;
-import xal.service.pvlogger.ChannelSnapshot;
-import xal.service.pvlogger.MachineSnapshot;
-import xal.service.pvlogger.PVLogger;
+import xal.service.pvlogger2.ChannelGroup;
+import xal.service.pvlogger2.ChannelSnapshot;
+import xal.service.pvlogger2.MachineSnapshot;
+import xal.service.pvlogger2.PVLogger;
 import xal.extension.application.*;
 import xal.extension.application.smf.*;
 import xal.tools.database.*;
 import xal.tools.apputils.files.RecentFileTracker;
-import xal.service.pvlogger.apputils.browser.*;
+import xal.service.pvlogger2.apputils.browser.*;
 import xal.extension.widgets.plot.*;
 import xal.extension.widgets.swing.KeyValueTableModel;
 import xal.extension.widgets.swing.KeyValueFilteredTableModel;
