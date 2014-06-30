@@ -15,10 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ArrayList;
-
 import java.math.BigDecimal;
 
 import xal.tools.database.DatabaseAdaptor;
@@ -33,6 +32,8 @@ public class ChannelSnapshotTable {
 	/** time stamp column */
 	protected final String TIMESTAMP_COLUMN;
 
+	protected final String NANOSECS_COLUMN;
+	
 	/** machine snapshot primary key */
 	protected final String MACHINE_SNAPSHOT_COLUMN;
 
@@ -60,6 +61,7 @@ public class ChannelSnapshotTable {
 		PV_COLUMN = configuration.getColumn( "pv" );
 
 		TIMESTAMP_COLUMN = configuration.getColumn( "timestamp" );
+		NANOSECS_COLUMN = configuration.getColumn("nanoseconds");
 		VALUE_COLUMN = configuration.getColumn( "value" );
 		STATUS_COLUMN = configuration.getColumn( "status" );
 		SEVERITY_COLUMN = configuration.getColumn( "severity" );
@@ -78,20 +80,27 @@ public class ChannelSnapshotTable {
 		final PreparedStatement insertStatement = getInsertStatement( connection );
 		boolean needsInsert = false;
 
+		final DecimalFormat NANOSECOND_FORMATTER = new DecimalFormat( "000000000" );
+		
 		for ( final ChannelSnapshot channelSnapshot : channelSnapshots ) {
 			if ( channelSnapshot != null ) {
 				final Timestamp timeStamp = channelSnapshot.getTimestamp().getSQLTimestamp();
+				BigDecimal tStamp = channelSnapshot.getTimestamp().getFullSeconds();
 				try {
 					final Array valueArray = databaseAdaptor.getArray( VALUE_ARRAY_TYPE, connection, channelSnapshot.getValue() );
+					
 					insertStatement.setLong( 1, machineSnapshotID );
 					insertStatement.setString( 2, channelSnapshot.getPV() );
-					insertStatement.setTimestamp( 3, timeStamp );
+					insertStatement.setTimestamp( 3, new java.sql.Timestamp( channelSnapshot.getTimestamp().getTime() ) );
 
-					insertStatement.setArray( 4, valueArray );
+					insertStatement.setInt(4, tStamp.subtract( tStamp.setScale(0, BigDecimal.ROUND_DOWN) ).movePointRight(9).intValue());
 
-					insertStatement.setInt( 5, channelSnapshot.getStatus() );
-					insertStatement.setInt( 6, channelSnapshot.getSeverity() );
+					insertStatement.setArray( 5, valueArray );
 
+					insertStatement.setInt( 6, channelSnapshot.getStatus() );
+					insertStatement.setInt( 7, channelSnapshot.getSeverity() );
+
+					
 					insertStatement.addBatch();
 					needsInsert = true;
 				}
@@ -132,11 +141,17 @@ public class ChannelSnapshotTable {
 			final double[] value = toDoubleArray( bigValue );
 			final short status = resultSet.getShort( STATUS_COLUMN );
 			final short severity = resultSet.getShort( SEVERITY_COLUMN );
-			snapshots.add( new ChannelSnapshot( pv, value, status, severity, new xal.ca.Timestamp( timestamp ) ) );
+			final int nanosecs = resultSet.getInt(NANOSECS_COLUMN);
+			snapshots.add( new ChannelSnapshot( pv, value, status, severity, new xal.ca.Timestamp( timestamp ), nanosecs ) );
 		}
 		if( snapshotQuery != null) {
 			snapshotQuery.close();
 		}
+		if (resultSet != null) {
+			resultSet.close();
+		}
+
+
 		resultSet.close();
 		return snapshots.toArray( new ChannelSnapshot[snapshots.size()] );
 	}
@@ -148,7 +163,7 @@ public class ChannelSnapshotTable {
 	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
 	 */
 	protected PreparedStatement getInsertStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", " + TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN + ", " + SEVERITY_COLUMN + ") VALUES (?, ?, ?, ?, ?, ?)" );
+		return connection.prepareStatement( "INSERT INTO " + TABLE_NAME + "(" + MACHINE_SNAPSHOT_COLUMN + ", " + PV_COLUMN + ", " + TIMESTAMP_COLUMN + ", " + VALUE_COLUMN + ", " + STATUS_COLUMN + ", " + SEVERITY_COLUMN + ", " + NANOSECS_COLUMN + ") VALUES (?, ?, ?, ?, ?, ?, ?)" );
 	}
 
 

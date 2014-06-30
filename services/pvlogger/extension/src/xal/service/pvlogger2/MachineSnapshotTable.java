@@ -85,7 +85,7 @@ public class MachineSnapshotTable {
 			queryStatement.close();
 		}
 		record.close();
-		return l;
+		return l+1;
 	}
 
 
@@ -207,7 +207,8 @@ public class MachineSnapshotTable {
 	 * @throws java.sql.SQLException  if an exception occurs during a SQL evaluation
 	 */
 	protected PreparedStatement getNextPrimaryKeyStatement( final Connection connection ) throws SQLException {
-		return connection.prepareStatement( NEXT_PRIMARY_KEY_SQL );
+//		return connection.prepareStatement( NEXT_PRIMARY_KEY_SQL );
+		return connection.prepareStatement("SELECT MAX("+PRIMARY_KEY+")"+" FROM "+TABLE_NAME);
 	}
 
 
