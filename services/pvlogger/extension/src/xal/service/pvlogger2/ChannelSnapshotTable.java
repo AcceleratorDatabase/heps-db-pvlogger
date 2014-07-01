@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.math.BigDecimal;
 
+import xal.tools.ArrayTool;
 import xal.tools.database.DatabaseAdaptor;
 
 
@@ -87,19 +88,20 @@ public class ChannelSnapshotTable {
 				final Timestamp timeStamp = channelSnapshot.getTimestamp().getSQLTimestamp();
 				BigDecimal tStamp = channelSnapshot.getTimestamp().getFullSeconds();
 				try {
-					final Array valueArray = databaseAdaptor.getArray( VALUE_ARRAY_TYPE, connection, channelSnapshot.getValue() );
+//					final Array valueArray = databaseAdaptor.getArray( VALUE_ARRAY_TYPE, connection, channelSnapshot.getValue() );
 					
 					insertStatement.setLong( 1, machineSnapshotID );
 					insertStatement.setString( 2, channelSnapshot.getPV() );
 					insertStatement.setTimestamp( 3, new java.sql.Timestamp( channelSnapshot.getTimestamp().getTime() ) );
 
-					insertStatement.setInt(4, tStamp.subtract( tStamp.setScale(0, BigDecimal.ROUND_DOWN) ).movePointRight(9).intValue());
+//					insertStatement.setArray( 5, valueArray );
+					
+					String value = ArrayTool.asString(channelSnapshot.getValue());
+					insertStatement.setString( 4, value );
 
-					insertStatement.setArray( 5, valueArray );
-
-					insertStatement.setInt( 6, channelSnapshot.getStatus() );
-					insertStatement.setInt( 7, channelSnapshot.getSeverity() );
-
+					insertStatement.setInt( 5, channelSnapshot.getStatus() );
+					insertStatement.setInt( 6, channelSnapshot.getSeverity() );
+					insertStatement.setInt(7, tStamp.subtract( tStamp.setScale(0, BigDecimal.ROUND_DOWN) ).movePointRight(9).intValue());
 					
 					insertStatement.addBatch();
 					needsInsert = true;
@@ -137,8 +139,13 @@ public class ChannelSnapshotTable {
 		while ( resultSet.next() ) {
 			final String pv = resultSet.getString( PV_COLUMN );
 			final Timestamp timestamp = resultSet.getTimestamp( TIMESTAMP_COLUMN );
-			final BigDecimal[] bigValue = (BigDecimal[])resultSet.getArray( VALUE_COLUMN ).getArray();
-			final double[] value = toDoubleArray( bigValue );
+			String strValue = resultSet.getString(VALUE_COLUMN);
+//			final double[] value =ArrayTool.getDoubleArrayFromString(strValue);
+			final double[] value = getDoubleArrayFromString(strValue);
+			
+//			final BigDecimal[] bigValue = (BigDecimal[])resultSet.getArray( VALUE_COLUMN ).getArray();
+//			final double[] value = toDoubleArray( bigValue );
+			
 			final short status = resultSet.getShort( STATUS_COLUMN );
 			final short severity = resultSet.getShort( SEVERITY_COLUMN );
 			final int nanosecs = resultSet.getInt(NANOSECS_COLUMN);
@@ -191,4 +198,20 @@ public class ChannelSnapshotTable {
 
 		return array;
 	}
+	
+	public double[] getDoubleArrayFromString(final String douString) {
+		double[] douArray=null;
+		int start = douString.indexOf("{");
+		int end = douString.indexOf("}");
+		if (start < end) {
+			String newString = douString.substring(start+1, end);
+			String[] strArray=newString.split(",");
+			douArray=new double[strArray.length];
+			for(int i=0;i<strArray.length;i++){				
+				douArray[i]=Double.valueOf(strArray[i]);				
+			}
+		}
+		return douArray;
+	}
+
 }
