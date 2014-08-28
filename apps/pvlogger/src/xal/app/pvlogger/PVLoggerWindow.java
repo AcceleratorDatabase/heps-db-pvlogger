@@ -317,7 +317,10 @@ class PVLoggerWindow extends AcceleratorWindow implements SwingConstants, Scroll
 		LoggerSessionHandler session = _model.getSelectedSessionHandler();
 		
 		String status = (session != null) ? String.valueOf( session.isLogging() ) : "false";
-		_loggingStatusField.setText(status);
+		_loggingStatusField.setText(status + "   " + new Date());
+
+		String periodText = (session != null) ? String.valueOf( session.getLoggingPeriod() ) : "0";
+		_loggingPeriodField.setText(periodText);
 	}
 	
 	
