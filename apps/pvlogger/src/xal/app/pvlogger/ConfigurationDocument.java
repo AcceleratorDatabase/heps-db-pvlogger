@@ -398,10 +398,10 @@ public class ConfigurationDocument extends AcceleratorDocument {
 	 * Get a custom menu definition for this document
      * @return The menu definition properties file
      */
-    protected String getCustomMenuDefinitionResource() {
+    public String getCustomMenuDefinitionResource() {
 		return "configuration-menu.properties";
     }
-	
+
 	
 	/** implement save command to do nothing */
 	public void saveDocumentAs( final java.net.URL theURL ) {}
