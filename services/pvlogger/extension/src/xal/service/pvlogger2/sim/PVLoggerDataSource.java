@@ -126,7 +126,7 @@ public class PVLoggerDataSource {
 			throw new RuntimeException( exception );
 		}
 	}
-
+	
 	/** populate the channel snapshot table */
 	protected Map<String,ChannelSnapshot> populateChannelSnapshotTable() {
 		final Map<String,ChannelSnapshot> snapshotMap = new HashMap<String,ChannelSnapshot>( CHANNEL_SNAPSHOTS.length );
@@ -156,11 +156,16 @@ public class PVLoggerDataSource {
 
 		for (int i = 0; i < CHANNEL_SNAPSHOTS.length; i++) {
 			final String snapshotPV = CHANNEL_SNAPSHOTS[i].getPV();
-			if ( CHANNEL_SNAPSHOTS[i].getPV().contains( "Mag:" ) ) {
+			if ( CHANNEL_SNAPSHOTS[i].getPV().contains( "Mag:" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( ":QH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( ":QV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( ":DCH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( ":DCV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( ":DH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( ":DV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( ":SOL" )) {
 				double[] val = CHANNEL_SNAPSHOTS[i].getValue();
 				pvMap.put( snapshotPV, val[0] );
 			}
 		}
+		
+		System.out.println("There are " + pvMap.size() + " magnet field related PVs");
 
 		return pvMap;
 	}
@@ -171,7 +176,10 @@ public class PVLoggerDataSource {
 		final Map<String, Double> pvMap = new HashMap<String, Double>();
 
 		for (int i = 0; i < CHANNEL_SNAPSHOTS.length; i++) {
-			if (CHANNEL_SNAPSHOTS[i].getPV().indexOf("Mag:PS_Q") > -1) {
+			if ((CHANNEL_SNAPSHOTS[i].getPV().indexOf("Mag:PS_Q") > -1) || CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_DCH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_DCV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_QH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_QV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_DH" ) ||
+					CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_DV" ) || CHANNEL_SNAPSHOTS[i].getPV().contains( "PS_SOL" ) ) {
 				double[] val = CHANNEL_SNAPSHOTS[i].getValue();
 				pvMap.put(CHANNEL_SNAPSHOTS[i].getPV(), new Double(val[0]));
 			}
@@ -244,7 +252,7 @@ public class PVLoggerDataSource {
 	/** Get the logged magnets that are in the specified sequence */
 	private List<Electromagnet> getLoggedMagnets( final AcceleratorSeq sequence ) {
 		// inlclude quadrupoles, dipole correctors and optionally bends
-		final OrTypeQualifier magnetQualifier = OrTypeQualifier.qualifierForKinds( Quadrupole.s_strType, HDipoleCorr.s_strType, VDipoleCorr.s_strType );
+		final OrTypeQualifier magnetQualifier = OrTypeQualifier.qualifierForKinds( Quadrupole.s_strType, HDipoleCorr.s_strType, VDipoleCorr.s_strType, Solenoid.s_strType );
 		if ( _usesLoggedBendFields )  magnetQualifier.or( Bend.s_strType );	// optionally include bends
 		
 		// filter magnets for those that are strictly electromagnets with good status
