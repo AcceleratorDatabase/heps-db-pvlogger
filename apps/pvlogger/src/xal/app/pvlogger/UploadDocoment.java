@@ -26,7 +26,7 @@ import java.net.URL;
 public class UploadDocoment extends AcceleratorDocument {
 
 	@Override
-	protected void makeMainWindow() {
+	public void makeMainWindow() {
 		mainWindow=new UploadWindow(this);		
 	}
 
