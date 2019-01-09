@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 /**
  * 
@@ -33,13 +34,13 @@ public class DBTools {
 				}
 				conn = (Connection) DriverManager.getConnection(url, user,
 						password);
-				boolean rbsign = conn.getRewriteBatchedStatements();
-				if (!rbsign) {
+//				boolean rbsign = conn.getRewriteBatchedStatements();
+//				if (!rbsign) {
 					url = url + "?rewriteBatchedStatements=true";
 					closeConnection();
 					conn = (Connection) DriverManager.getConnection(url, user,
 							password);
-				}
+//				}
 			} catch (ClassNotFoundException ce) {
 				ce.printStackTrace();
 			} catch (SQLException se) {
@@ -51,13 +52,13 @@ public class DBTools {
 			if (!user.equals(u)) {
 				closeConnection();
 				DriverManager.getConnection(url, user, password);
-				boolean rbsign = conn.getRewriteBatchedStatements();
-				if (!rbsign) {
+//				boolean rbsign = conn.getRewriteBatchedStatements();
+//				if (!rbsign) {
 					url = url + "?rewriteBatchedStatements=true";
 					closeConnection();
 					conn = (Connection) DriverManager.getConnection(url, user,
 							password);
-				}
+//				}
 			}
 		}
 		return conn;

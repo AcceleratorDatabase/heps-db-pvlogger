@@ -18,6 +18,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/openxal"/>
 	<classpathentry kind="lib" path="/openxal/plugins/jca/lib/caj.jar"/>
 	<classpathentry kind="lib" path="/openxal/plugins/jca/lib/jca.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/NetBeans 8.0/ide/modules/ext/mysql-connector-java-5.1.23-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
